@@ -8,7 +8,7 @@
 \usepackage{xcolor}
 \usepackage{sectsty,wrapfig}
 \usepackage{hyperref}
-
+\allowdisplaybreaks
 
 \newtheorem{thm}{Theorem}[section]
 \newtheorem{prp}[thm]{Proposition}
@@ -408,15 +408,81 @@ This proves (\ref{yellow_eqn}).
 
 
 \begin{appendices}
-\section{Extending differential forms in a manifold with boundary and corners from boundary to interior}
+\section{Extending differential forms on a manifold with corners from boundary to interior}
 
-Suppose $M$ is a manifold with boundary and corners. Let $\partial M$ denote the closed boundary of $M$, i.e.~the union of all non-top-dimensional strata. 
-In this section we prove the following 
-\begin{prp}
+We first clarify the notation used in the present paper concerning manifold with corners, mostly following \cite{Hajek} and \cite{Joyce}. Here is a dictionary for our notation: 
+\begin{enumerate}[label=$\cdot$]
+\item {\it (smooth) manifold with corners}: as in \cite[page 3]{Joyce} or, equivalently, \cite[Definition 3]{Hajek}. 
+%we often omit ``smooth'' and just say ``manifold with corners'', but it is always assumed to be smooth
+\item {\it smooth map between manifolds with corners}: \cite[Definition 4]{Hajek} (``weakly smooth map'' in \cite[Definition 3.1]{Joyce})
+
+\item {\it tangent and cotangent spaces of manifolds with corners}: \cite[Definition 10]{Hajek} (equivalently, \cite[Definition 2.2]{Joyce})
+
+\item {\it cotangent bundle, tensor and exterior powers of cotangent bundle of manifolds with corners}: follows from the definition of cotangent spaces
+
+\item {\it differential form on manifolds with corners}: smooth section of exterior powers of the cotangent bundle
+
+For example, in $(\R^{\ge0})^n$ with coordinates denoted by $(x_1,\ldots,x_n)$, a differential form of degree $k$ can be written as 
+$$\sum_{1\le i_1<\ldots<i_k\le n}f_{i_1\ldots i_k}dx_{i_1}\wedge\ldots\wedge dx_{i_k},$$
+where $f_{i_1\ldots i_k}$ are functions on $(\R^{\ge0})^n$, smooth in the sense that there exist smooth functions $\hat{f}_{i_1\ldots i_k}$ on an open neighborhood of $(\R^{\ge0})^n$ in $\R^n$, such that $f_{i_1\ldots i_k}=\hat{f}_{i_1\ldots i_k}|_{(\R^{\ge0})^n}$. 
+For $0\le m<n$, the restriction (pullback by inclusion map) of the above differential form to $(\R^{\ge0})^m\approx \{x_{m+1}=\ldots=x_n=0\}\subset(\R^{\ge0})^n$ will be 
+$$\sum_{1\le i_1<\ldots<i_k\le m}f_{i_1\ldots i_k}dx_{i_1}\wedge\ldots\wedge dx_{i_k};$$
+namely, we remove the terms containing any $dx_i$ with $i>m$. 
+
+\item {\it $\partial M$, the boundary of a manifold with corners $M$}: the image of the map $i_M:\partial M\to M$ in \cite[Definition 2.6]{Joyce}
+
+\item $\tilde\partial M$: $\partial M$ in \cite[Definition 2.6]{Joyce}
+
+\item {\it codimension-$d$ (depth-$d$) stratum}: \cite[Definition 7]{Hajek} (a connected component of a depth-$d$ stratum in \cite[Definition 2.3]{Joyce})
+
+For example, a solid cube has 6 codim-1 strata and 12 codim-2 strata. Its boundary is the surface of the cube, and its $\tilde\partial$ is the disjoint union of 6 closed squares. 
+
+\item {\it manifold with embedded faces}: \cite[Definition 18]{Hajek}: a manifold with corners such that the closure of every codim-1 strata is an embedded manifold with corners. 
+\end{enumerate}
+
+
+%In this paper, we follow \cite[page 3]{Joyce} for the definition of a smooth manifold with corners.
+%We call a weakly smooth map in \cite[Definition 3.1]{Joyce} between manifolds with corners a smooth map instead.
+%Tangent spaces of manifolds with corner are defined in \cite[Definition 2.2]{Joyce}, and hence tangent bundles, cotangent bundles, and their tensor bundles are defined. 
+%We define differential forms on a manifold with corners to be smooth sections of exterior powers of the cotangent bundle. 
+
+
+
+
+In this appendix we prove the following 
+\begin{prp}\label{formextension_prp}
+Let $M$ be a compact manifold with embedded faces. 
 Suppose for each stratum $S\subset\partial M$ of $M$, $\omega_S$ is a closed differential form of degree $k$ on $\ov{S}$, such that, for each pair of strata $T\subset \ov{S} \subset\partial{M}$, $\omega_T=\omega_S|_{\ov{T}}$. 
 Then, there exists an open neighborhood $U$ of $\partial M$ and a closed differential form $\omega$ on $U$ such that $\omega|_{\ov{S}}=\omega_S$ for all strata $S\subset\partial M$. 
 \end{prp}
 
+In light of Proposition \ref{formextension_prp}, we also define
+\begin{enumerate}[label=$\cdot$, nolistsep]
+\item {\it degree-$k$ differential form on $\partial M$}: a compatible collection of forms, $\{\omega_S\}_S$, as in Proposition \ref{formextension_prp}. 
+\end{enumerate}
+\begin{rmk}
+It is easy to see that the $\R$-singular cohomology of $\partial M$ (or more generally, any manifold with corners and ``hinges'') is equivalent to the de Rham cohomology defined using these forms, but we do not need it in the present paper.
+\end{rmk}
+
+
+\begin{lmm}\label{formextension_lmm}
+Let $M$ be a manifold with corners and $U$ an open neighborhood of $\partial M$. 
+Suppose $\omega$ is a closed $k$-form on $U$ such that $[\omega]$ lies in the image of the restriction map $H^k(M;\R)\to H^k(U;\R)$, 
+then there is a neighborhood $U''\subset U$ of $\partial M$ such that $\omega|_{U''}$ can be extended to a closed $k$-form on $M$. 
+\end{lmm}
+
+\begin{proof}[Proof (same as \textcolor{red}{(add ref)})]
+Let $\alpha$ be a closed $d$-form on $M\backslash{\partial M}$ such that the restriction of $[\alpha]$ to $U$ is $[\omega]$. 
+Then, there exists a $(k-1)$-form $\beta$ on $U$ such that $d\beta=\omega-\alpha|_{U}$. 
+We can find\footnote{For example, using a metric on $M$ and properly modify the distance function to $\partial M$.} open subsets $U',U''$ of $M$ such that $\partial M\subsetneq U''\subsetneq U'\subsetneq U$, and a smooth function $f:M\to[0,1]$ such that $f|_{U''}\equiv 0$, $f|_{M\backslash U'}\equiv1$. 
+Define $\omega'=\omega-d(f\beta)$ on $U$. Then $\omega'\equiv\omega$ on $U''$, $\omega'\equiv\alpha$ on $U\backslash U'$, and $d\omega'=0$. So we can extend $\omega'$ to a form on $M$, defining it to be $\alpha$ out of $U$. 
+\end{proof}
+
+\begin{crl}\label{formextension_crl}
+Suppose $M$ is a manifold with corners such that $H^k(M;\R)\to H^k(\partial M;R)$ is surjective. Then, every closed $k$-form on $\partial M$ can be extended to a closed $k$-form on $M$. 
+\end{crl}
+
+The rest of this section is devoted to the proof of Proposition \ref{formextension_prp}.
 First we prove the statement locally, in $(\R^{\ge0})^d\times\R^{n-d}$, where $0\le d\le n$ and $0\le k\le n$ are integers. 
 %In $(\R^{\ge0})^d\times\R^{n-d}$, we use variables $x_1,\ldots,x_n$ to denote the coordinates. 
 %Given $I=\{i_1,\ldots,i_k\}\subset\{1,\ldots,n\}$ where $i_1<\ldots<i_k$, we use the abbreviate $$dx_I:=dx_{i_1}\wedge\ldots\wedge dx_{i_k}.$$ 
@@ -444,7 +510,7 @@ If all $\omega_i$s are closed, $\omega$ is clearly also closed.
 \end{proof}
 
 Next, we patch the forms constructed locally to a global one. Without the closeness condition, this would be immediate by applying a partition of unity. With the closeness condition it is much subtler. 
-The argument uses the same technique as translating between \v{C}ech and de Rham cohomology. 
+The argument uses the same technique as translating between \v{C}ech and de Rham cohomology (see, e.g. \cite{BottTu}), which can also be viewed as a generalization of the technique in the proof of Lemma \ref{formextension_lmm}. 
 Note that from now on, the index set $I$ has a different meaning than in Lemma \ref{localformpatching_lmm}. 
 
 Given $p,q\in\Z^{\ge0}$, a manifold $M$ and a locally finite open cover $\cU=\{U_i\}_{i\in I}$ of $M$, recall a (skew-symmetric) $p$-\v{C}ech cochain of $q$-forms on $M$ is: for each sequence $(i_0,i_1,\ldots,i_p)\in I^{p+1}$, a differential $q$-form $\alpha_{i_0i_1\ldots i_p}$ on $\bigcap_{j=0}^pU_{i_j}$; such that for all $j$, 
@@ -537,11 +603,24 @@ then $d\alpha'=0$ and $\iota^*\alpha'=\iota^*\alpha-\sum_{i\in I}d((f_i\circ\iot
 \end{align*}
 Therefore, $\check\delta\alpha'=\check\delta\alpha-d\beta=0$, as desired. 
 \end{proof}
-Now we apply Lemma \ref{cechform2_lmm} to our case. 
-\begin{crl}\label{formpatching_crl}
 
-\end{crl}
+
+%Now we show that in our case, the condition of Lemma \ref{cechform2_lmm} can be satisfied. 
+\begin{lmm}\label{cover_lmm}
+Suppose $M$ is a compact manifold with corners. Then, there exist an open neighborhood $U$ of $\partial M$, a finite open cover $\cU$ of $U$, such that $\cU$ satisfies the condition in Lemma \ref{cechform2_lmm} when we plug in $\partial M$ for $N$, $U$ for $M$, and the inclusion map for $\iota$. 
+\end{lmm}
+
+\cite[Definition 35, Theorem 17]{Hajek}
 
 \end{appendices}
+
+\begin{thebibliography}{99}
+\bibitem{BottTu} R. Bott and L. Tu, {\it Differential Forms in Algebraic Topology}, Springer, 1982
+
+\bibitem{Hajek} P. H\'ajek, {\it On manifolds with corners}, Master's Thesis, Ludwig Maximilian University of Munich, 2014
+
+
+\bibitem{Joyce} D. Joyce, {\it On manifolds with corners}, arxiv/0910.3518v2
+\end{thebibliography}
 
 \end{document}

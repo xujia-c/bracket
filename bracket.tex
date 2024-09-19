@@ -1,4 +1,5 @@
 \documentclass[11pt]{article}
+\usepackage[title]{appendix}
 \usepackage{amsmath,amssymb,amsthm}
 \usepackage{enumitem}
 \usepackage[left=1in,right=1in,top=1in,bottom=1in]{geometry}
@@ -27,6 +28,12 @@
 \def\ov#1{\overline{#1}}
 \def\mr#1{{\mathring{#1}}}
 
+\def\sgray{{\textnormal{gray}}}
+\def\sred{{\textnormal{red}}}
+\def\syellow{{\textnormal{yellow}}}
+\def\sorange{{\textnormal{orange}}}
+\def\sblue{{\textnormal{blue}}}
+
 
 \def\Z{\mathbb{Z}}
 \def\C{\mathbb{C}}
@@ -38,9 +45,12 @@
 \def\cA{\mathcal{A}}
 \def\cD{\mathcal{D}}
 \def\cG{\mathcal{G}}
+\def\cI{\mathcal{I}}
 \def\cM{\mathcal{M}}
 \def\cT{\mathcal{T}}
 \def\cN{\mathcal{N}}
+\def\cP{\mathcal{P}}
+\def\cU{\mathcal{U}}
 \def\rI{{\mathring{I}}}
 
 \def\cmt#1{\textcolor{purple}{(#1)}}
@@ -119,21 +129,85 @@ Throughout, $\pi_1,\pi_2$ are given and fixed.
 
 \section{Conftilde}\label{conftilde_sec}
 
-Construct the big configuration space $\widetilde{C}_n$. 
+Construct the big configuration space $\widetilde{C}_A$. 
 Show that it is a smooth manifold with boundary and corners. 
 (These are mostly already written in the file ``conftilde'' I sent a while ago.)
 
-Here is a schematic picture of $\wt{C}_n$ (the marked points are not drawn; the actual stratification structure of $\wt{C}_n$ is more complicated than what is shown in the picture): 
+What we need are the following: 
+
+\begin{itemize}
+\item $\widetilde{C}_A$ is a smooth manifold with boundary and corners; 
+\item each $S_T$ is a stratum of $\widetilde{C}_A$; 
+\item $\overline{S}_T=\bigsqcup_{T'}S_{T'}$, where the disjoint union is taken over all $A$-labeled trees $T'$ such that $T$ can be obtained from $T'$ by contracting some edges. 
+
+\end{itemize}
+
+Here is a schematic picture of $\wt{C}_A$ (the marked points are not drawn; the actual stratification structure of $\wt{C}_A$ is more complicated than what is shown in the picture): 
 
 \includegraphics[scale=0.7]{conftilde.png}
 
-The boundary of $\wt{C}_n$ consists of 3 parts: 
+The boundary of $\wt{C}_A$ consists of the following parts: 
 \begin{itemize}
-\item the gray part is $\ov{C}_n([\pi_1,\pi_2])$;
-\item the blue part is a 1-parameter family of $\partial \ov{C}_n([\pi_1,\pi_2])$---its interior is diffeomorphic to 
-$$\partial \ov{C}_n([\pi_1,\pi_2])\times (0,1);$$
-\item $\ov{C}^*_n$, consisting of the red, orange, and yellow parts. 
+\item the gray part, denoted by $\ov{S}_\sgray$, is $\ov{C}_A([\pi_1,\pi_2])$; its interior, denoted by $S_\sgray$, is $C_A([\pi_1,\pi_2])$; 
+\item ${S}_\sblue:=\bigcup_{T\in\cT_\sblue}S_T$, where $\cT_\sblue$ is the set of all $A$-labeled trees whose shape and space labels are like
+$\begin{tikzpicture}
+\node [below] at (0,0) {\tiny{r}};  
+\node [right, black!60!green] at (0,0) {\tiny{$[\pi_1,\pi_2]$}};
+\node [right, black!60!green] at (0,0.5) {\tiny{$\R^d$}};
+\draw [fill] (0,0) circle [radius=0.02];
+\draw [fill] (0,0.5) circle [radius=0.02];
+\draw (0,0) -- (0,0.5);
+\end{tikzpicture}$ or 
+$\begin{tikzpicture}
+\node [below] at (0,0) {\tiny{r}};  
+\node [right, black!60!green] at (0,0) {\tiny{$\R^d$}};
+\node [right, black!60!green] at (0,0.5) {\tiny{$[\pi_1,\pi_2]$}};
+\draw [fill] (0,0) circle [radius=0.02];
+\draw [fill] (0,0.5) circle [radius=0.02];
+\draw (0,0) -- (0,0.5);
+\end{tikzpicture}$;
+and let $\ov{S}_\sblue$ be the closure of $S_\sblue$;
+\item ${S}_\sred:=\bigcup_{T\in\cT_\sred}S_T$, where $\cT_\sred$ is the set of all $A$-labeled trees with the following shape and space labels: 
+$\begin{tikzpicture}
+\node [below] at (0,0) {\tiny{r}};  
+\node [right, black!60!green] at (0,0) {\tiny{$\pi_1$}};
+\node [right, black!60!green] at (0,0.5) {\tiny{$\pi_2$}};
+\draw [fill] (0,0) circle [radius=0.02];
+\draw [fill] (0,0.5) circle [radius=0.02];
+\draw (0,0) -- (0,0.5);
+\end{tikzpicture}$;
+and let $\ov{S}_\sred$ be the closure of $S_\sred$;
+\item ${S}_\syellow:=\bigcup_{T\in\cT_\syellow}S_T$, where $\cT_\syellow$ is the set of all $A$-labeled trees with the following shape and space labels: 
+$\begin{tikzpicture}
+\node [below] at (0,0) {\tiny{r}};  
+\node [right, black!60!green] at (0,0) {\tiny{$\pi_2$}};
+\node [right, black!60!green] at (0,0.5) {\tiny{$\pi_1$}};
+\draw [fill] (0,0) circle [radius=0.02];
+\draw [fill] (0,0.5) circle [radius=0.02];
+\draw (0,0) -- (0,0.5);
+\end{tikzpicture}$;
+and let $\ov{S}_\syellow$ be the closure of $S_\syellow$; 
 \end{itemize}
+
+We also define
+${S}_\sorange:=\bigcup_{T\in\cT_\sorange}S_T$, where $\cT_\sorange$ is the set of all $A$-labeled trees with the following shape and space labels: 
+$\begin{tikzpicture}
+\node [below] at (0,0) {\tiny{r}};  
+\node [right, black!60!green] at (0,0) {\tiny{$\R^d$}};
+\node [right, black!60!green] at (-0.5,0.5) {\tiny{$\pi_1$}};
+\node [right, black!60!green] at (0.5,0.5) {\tiny{$\pi_2$}};
+\draw [fill] (0,0) circle [radius=0.02];
+\draw [fill] (-0.5,0.5) circle [radius=0.02];
+\draw [fill] (0.5,0.5) circle [radius=0.02];
+\draw (-0.5,0.5) -- (0,0) -- (0.5,0.5);
+\end{tikzpicture}$;
+and let $\ov{S}_\sorange$ be the closure of $S_\sorange$. Then, $\ov{S}_\sorange=\ov{S}_\sred\cap\ov{S}_\syellow$. 
+
+We define $\ov{C}^*_A=\ov{S}_\sred\cup\ov{S}_\syellow$.
+
+% note that 
+%${S}_T$ is a 1-parameter family of $\partial \ov{C}_n([\pi_1,\pi_2])$---its interior is diffeomorphic to 
+%$$\partial \ov{C}_n([\pi_1,\pi_2])\times (0,1);$$
 
 \section{Propagators}
 
@@ -169,18 +243,18 @@ since they both become $(f')^*\omega_0$, where $f':S'\to S^{d-1}$ is the forgetf
 All other codimension-1 strata can be straight-forwardly checked like this as well. 
 We may need to check higher-codimension strata as well but it shouldn't be hard.
 
-\begin{rmk}
-I lied a bit---``compatibility'' of $\omega_*$ along the gluing is a stronger condition then it is presented above. 
-Given two manifolds with boundary, $X,Y$, such that $\partial X\approx \partial Y=:W$, let $Z$ be the space obtained by gluing $X,Y$ together along their common boundary $W$, but we do not specify a smooth structure near $W$;
-then, say a form $\alpha$ on $X$ is compatible with a form $\beta$ on $Y$ if 
-\begin{itemize}
-\item $\alpha|_W=\beta|_{W}$;
-\item there are collar neighborhoods $N_X$ of $W$ in $X$ and $N_Y$ of $W$ in $Y$ (with projection maps $p_X:N_X\to W$, $p_Y:N_Y\to W$) such that 
-$\alpha|_{N_X}=p_X^*\alpha|_W$, $\beta|_{N_Y}=p_Y^*\beta|_W$. 
-\end{itemize} 
-The second condition says that in a collar neighborhood of the boundary the forms are trivial in the normal direction. 
-In our situation, this stronger compatibility condition should be achievable as well, if we impose a similar condition (``parallel to boundary'' near the boundary) on $\omega_1,\omega_2$. 
-\end{rmk} 
+%\begin{rmk}%not true and not needed anymore
+%I lied a bit---``compatibility'' of $\omega_*$ along the gluing is a stronger condition then it is presented above. 
+%Given two manifolds with boundary, $X,Y$, such that $\partial X\approx \partial Y=:W$, let $Z$ be the space obtained by gluing $X,Y$ together along their common boundary $W$, but we do not specify a smooth structure near $W$;
+%then, say a form $\alpha$ on $X$ is compatible with a form $\beta$ on $Y$ if 
+%\begin{itemize}
+%\item $\alpha|_W=\beta|_{W}$;
+%\item there are collar neighborhoods $N_X$ of $W$ in $X$ and $N_Y$ of $W$ in $Y$ (with projection maps $p_X:N_X\to W$, $p_Y:N_Y\to W$) such that 
+%$\alpha|_{N_X}=p_X^*\alpha|_W$, $\beta|_{N_Y}=p_Y^*\beta|_W$. 
+%\end{itemize} 
+%The second condition says that in a collar neighborhood of the boundary the forms are trivial in the normal direction. 
+%In our situation, this stronger compatibility condition should be achievable as well, if we impose a similar condition (``parallel to boundary'' near the boundary) on $\omega_1,\omega_2$. 
+%\end{rmk} 
 
 \subsection{Propagator on other parts of the boundary of conftilde}
 
@@ -191,6 +265,12 @@ To define a propagator in the gray part of $\partial\wt{C}_2$, we just choose an
 Now we have defined a propagator on all of $\partial\wt{C}_2$. 
 
 \subsection{Extend the propagator to the interior}
+
+
+\begin{lmm}
+
+\end{lmm}
+
 
 To show that there exists a closed form on $\wt{C}_2$ extending the propagator we just defined on $\partial\wt{C}_2$, 
 it suffices to show that the map 
@@ -326,5 +406,142 @@ f_e^*{\omega_2}\Big).
 $$ 
 This proves (\ref{yellow_eqn}). 
 
+
+\begin{appendices}
+\section{Extending differential forms in a manifold with boundary and corners from boundary to interior}
+
+Suppose $M$ is a manifold with boundary and corners. Let $\partial M$ denote the closed boundary of $M$, i.e.~the union of all non-top-dimensional strata. 
+In this section we prove the following 
+\begin{prp}
+Suppose for each stratum $S\subset\partial M$ of $M$, $\omega_S$ is a closed differential form of degree $k$ on $\ov{S}$, such that, for each pair of strata $T\subset \ov{S} \subset\partial{M}$, $\omega_T=\omega_S|_{\ov{T}}$. 
+Then, there exists an open neighborhood $U$ of $\partial M$ and a closed differential form $\omega$ on $U$ such that $\omega|_{\ov{S}}=\omega_S$ for all strata $S\subset\partial M$. 
+\end{prp}
+
+First we prove the statement locally, in $(\R^{\ge0})^d\times\R^{n-d}$, where $0\le d\le n$ and $0\le k\le n$ are integers. 
+%In $(\R^{\ge0})^d\times\R^{n-d}$, we use variables $x_1,\ldots,x_n$ to denote the coordinates. 
+%Given $I=\{i_1,\ldots,i_k\}\subset\{1,\ldots,n\}$ where $i_1<\ldots<i_k$, we use the abbreviate $$dx_I:=dx_{i_1}\wedge\ldots\wedge dx_{i_k}.$$ 
+For $I\subset\{1,\ldots,d\}$, define $H_I:=\big\{(x_1,\ldots,x_n)\big|\,\forall i\in I, x_i=0\big\}\subset (\R^{\ge0})^d\times\R^{n-d}$. 
+Write $H_i:=H_{\{i\}}$ and $H_{i,j}=H_{\{i,j\}}$. 
+\begin{lmm}\label{localformpatching_lmm}
+Suppose for each $1\le i\le d$, $\omega_i$ is a degree-$k$ differential form on $H_i$, such that, for all $1\le i,j\le d$, $\omega_i|_{H_{i,j}}=\omega_j|_{H_{i,j}}$. 
+Then, there exists a degree-$k$ differential form $\omega$ on $(\R^{\ge0})^d\times\R^{n-d}$, such that, for all $1\le i\le d$, $\omega|_{H_i}=\omega_i$. 
+Moreover, if all $\omega_i$ are closed, $\omega$ can be taken to be closed as well. 
+\end{lmm}
+\begin{proof}
+From the condition $\omega_i|_{H_{i,j}}=\omega_j|_{H_{i,j}}$ it is clear that for any $I\subset\{1,\ldots,d\}$, the forms $\omega_i|_{H_I}$ are the same for all $i\in I$. We hence denote it by $\omega_I$, which is on $H_I$. %Also write $\omega_{i,j}:=\omega_{\{i,j\}}$. 
+Let $$p_I:(\R^{\ge0})^d\times\R^{n-d}\longrightarrow H_I$$
+be the projection map, sending all $I$-coordinates to 0 and not changing the other coordinates. 
+We take $\omega$ to be the alternating sum
+$$
+\omega=\sum_{1\le i\le d}p_{\{i\}}^*\omega_i
+-\sum_{1\le i<j\le d}p_{\{i,j\}}^*\omega_{\{i,j\}}
++\sum_{1\le i<j<k\le d}p_{\{i,j,k\}}^*\omega_{\{i,j,k\}}
+-\ldots+(-1)^{d-1}p_{\{1,\ldots,d\}}^*\omega_{\{1,\ldots,d\}}.
+$$
+To see that $\omega|_{H_i}=\omega_i$ for a given $i\in\{1,\ldots,d\}$, note that, for each $I\subset\{1,\ldots,d\}$ with $I\neq\emptyset$ and $i\notin I$,
+$$(p_I^*\omega_I)|_{H_i}=p_I^*(\omega_I|_{H_i})=p_{I\sqcup\{i\}}^*(\omega_{I\sqcup\{i\}}|_{H_i})=(p_{I\sqcup\{i\}}^*\omega_{I\sqcup\{i\}})|_{H_i},$$ so these two terms cancel with each other. 
+If all $\omega_i$s are closed, $\omega$ is clearly also closed. 
+\end{proof}
+
+Next, we patch the forms constructed locally to a global one. Without the closeness condition, this would be immediate by applying a partition of unity. With the closeness condition it is much subtler. 
+The argument uses the same technique as translating between \v{C}ech and de Rham cohomology. 
+Note that from now on, the index set $I$ has a different meaning than in Lemma \ref{localformpatching_lmm}. 
+
+Given $p,q\in\Z^{\ge0}$, a manifold $M$ and a locally finite open cover $\cU=\{U_i\}_{i\in I}$ of $M$, recall a (skew-symmetric) $p$-\v{C}ech cochain of $q$-forms on $M$ is: for each sequence $(i_0,i_1,\ldots,i_p)\in I^{p+1}$, a differential $q$-form $\alpha_{i_0i_1\ldots i_p}$ on $\bigcap_{j=0}^pU_{i_j}$; such that for all $j$, 
+$\alpha_{i_0\ldots i_ji_{j+1}\ldots i_p}=-\alpha_{i_0\ldots i_{j+1}i_j\ldots i_p}.$
+We denote the $\R$-vector space of $p$-\v{C}ech cochain of $q$-forms on $M$ by $\check{C}^p_\cU(M;\cA^q)$. 
+The \v{C}ech differential is 
+\begin{align*}
+&\check\delta:\check{C}^p_\cU(M;\cA^q)\longrightarrow\check{C}^{p+1}_\cU(M;\cA^{q})\\
+\check{\delta}\,(\alpha_{i_0\ldots i_p})_{(i_0\ldots i_p)\in I^{p+1}}=&(\beta_{i_0\ldots i_{p+1}})_{(i_0\ldots i_{p+1})\in I^{p+2}},\qquad
+\beta_{i_0\ldots i_{p+1}}=\sum_{j=0}^{p+1}(-1)^j\alpha_{i_0\ldots \hat{i}_j\ldots i_{p+1}}\big|_{U_{i_0}\cap\ldots\cap U_{i_{p+1}}}.
+\end{align*}
+We also still denote by $d$ the termwise differential of forms:  $$d:\check{C}^p_\cU(M;\cA^q)\longrightarrow\check{C}^{p}_\cU(M;\cA^{q+1}),\qquad d\,(\alpha_{i_0\ldots i_p})_{(i_0\ldots i_p)\in I^{p+1}}=(d\alpha_{i_0\ldots i_p})_{(i_0\ldots i_p)\in I^{p+1}}.$$
+It is clear that $\check\delta d=d\check\delta$, and both $d$ and $\check\delta$ commute with pull-back maps between manifolds. 
+
+\begin{lmm}\label{cechform_lmm}
+Suppose $N,M$ are smooth manifolds, possibly with boundary and corners, and $\iota: N\to M$ is a smooth map\footnote{%It is not necessary to assume that $\iota$ intersects the boundary and corner strata transversely. 
+In our application of this lemma, $N$ is $\partial M$
+%the union of codim-1 boundary strata of $M$ 
+and $\iota$ is the inclusion map.}. 
+Suppose $\cU=\{U_i\}_{i\in I}$ is a locally finite open cover of $M$ satisfying the condition that for all subset $I'\subset I$, if $U_{I'}:=\bigcap_{i\in I'}U_i$ is non-empty, then 
+\begin{enumerate}[noitemsep, nolistsep]
+\item \label{condition1_item} all de Rham cohomology groups of $U_{I'}$ are the same as those of a point, 
+\item \label{condition2_item} $\iota^{-1}(U_{I'})\neq\emptyset$, and 
+\item \label{condition3_item} if $\sigma$ is a closed form on $\iota^{-1}(U_{I'})$, then there exists a closed form $\tilde\sigma$ on $U_{I'}$ with $\iota^*\tilde\sigma=\sigma$. 
+\end{enumerate}
+Then, the following proposition $\cP^q_p$ holds for all $p\ge0$,$q\ge1$: 
+\begin{enumerate}[noitemsep, nolistsep, label=$\cP^q_p$:]
+\item Suppose 
+$\alpha=(\alpha_{i_0\ldots i_p})_{(i_0\ldots i_p)\in I^{p+1}}\in\check{C}^p_{\cU}(M;\cA^q)$
+satisfies $\check{\delta}\alpha=0$, $\iota^*\alpha=0$ and $d\alpha=0$,
+then, there exists 
+$\beta=(\beta_{i_0\ldots i_p})_{(i_0\ldots i_p)\in I^{p+1}}\in\check{C}^p_{\cU}(M;\cA^{q-1})$
+such that $\check{\delta}\beta=0$, $\iota^*\beta=0$ and $d\beta=\alpha$. 
+\end{enumerate}
+\end{lmm}
+\begin{proof}
+Two steps: we first show that $\cP^{q-1}_{p+1}\implies\cP^{q}_p$, then show that $\cP^1_{p}$ holds for all $p\ge0$. 
+
+Step 1: Suppose $q\ge2$ and $\alpha$ is as in the condition of $\cP^q_p$. 
+By condition \ref{condition1_item} above, there is $\beta''\in\check{C}^p_{\cU}(M;\cA^{q-1})$ such that $d\beta''=\alpha$. Then, $d\iota^*\beta''=0$, so condition \ref{condition3_item} above implies that there is $\tilde\beta''\in\check{C}^p_{\cU}(M;\cA^{q-1})$ such that $d\tilde\beta''=0$ and $\iota^*\tilde\beta''=\iota^*\beta''$.
+Setting $\beta'=\beta''-\tilde\beta''$ we have $d\beta'=\alpha$ and $\iota^*\beta'=0$. 
+Since $d\check\delta \beta'=\check\delta\alpha=0$ and $\iota^*\check\delta\beta'=0$, $\check\delta\beta'$ (replacing $\alpha$) satisfies the condition of $\cP^{q-1}_{p+1}$. 
+If we assume $\cP^{q-1}_{p+1}$ holds, then there exists $\gamma\in\check{C}^{p+1}_{\cU}(M;\cA^{q-2})$ with $\check\delta\gamma=0$, $\iota^*\gamma=0$ and $d\gamma=\check\delta\beta'$. 
+
+Let $\{f_i:U_i\to[0,1]\}_{i\in I}$ be a partition of unity subordinate to $\cU$.  
+we define $\beta$ by taking
+$$\beta_{i_0\ldots i_{p}}
+=\beta'_{i_0\ldots i_{p}}-\sum_{i\in I}d(f_i\cdot\gamma_{ii_0\ldots i_p}).
+%=\beta'_{i_0\ldots i_{p}}+\sum_{i\in I}(df_i\wedge\gamma_{ii_0\ldots i_p}+f_i\cdot d\gamma_{ii_0\ldots i_p})
+$$
+It is clear that $d\beta=d\beta'=\alpha$ and, since $\iota^*\gamma=0$, $\iota^*\beta=\iota^*\beta'-\sum_{i\in I}d\big((f_i\circ{\iota})\cdot\iota^*\gamma_{ii_0\ldots i_p}\big)=0.$
+And
+\begin{align}\label{cech_eqn}
+(\check\delta\beta'-\check\delta\beta&)_{i_0\ldots i_{p+1}}
+=\sum_{j=0}^{p+1}(-1)^j(\beta'-\beta)_{i_0\ldots\hat{i}_j\ldots i_{p+1}}
+=\sum_{j=0}^{p+1}(-1)^j\sum_{i\in I}d(f_i\cdot\gamma_{ii_0\ldots\hat{i}_j\ldots i_{p+1}})\nonumber\\
+&=d\sum_{i\in I}\Big(f_i\cdot \sum_{j=0}^{p+1}(-1)^j\gamma_{ii_0\ldots\hat{i}_j\ldots i_{p+1}} \Big)
+=d\sum_{i\in I}f_i\cdot (\gamma_{i_0\ldots i_{p+1}}-(\check\delta\gamma)_{ii_0\ldots i_{p+1}})
+=d\gamma_{i_0\ldots i_{p+1}}, 
+%=\sum_{j=0}^{p+1}(-1)^j\sum_{i\in I}(df_i\wedge\gamma_{ii_0\ldots\hat{i}_j\ldots i_{p+1}}+f_i\cdot d\gamma_{ii_0\ldots\hat{i}_j\ldots i_{p+1}})\\
+%=\sum_{i\in I}df_i\wedge\big(\sum_{j=0}^{p+1}(-1)^j\gamma_{ii_0\ldots\hat{i}_j\ldots i_{p+1}}\big)+\sum_{i\in I}f_i\cdot d \big(\sum_{j=0}^{p+1}(-1)^j\gamma_{ii_0\ldots\hat{i}_j\ldots i_{p+1}}\big). 
+\end{align}
+where the last equality is due to $\check\delta\gamma=0$, 
+and the 4-th equality holds because
+$$\sum_{j=0}^{p+1}(-1)^j\gamma_{ii_0\ldots\hat{i}_j\ldots i_{p+1}}=-(\check\delta\gamma)_{ii_0\ldots i_{p+1}}+\gamma_{i_0\ldots i_{p+1}}.$$
+Therefore, we have $\beta$ such that $\check\delta\beta=0$, $\iota^*\beta=0$ and $d\beta=\alpha$, as desired. 
+
+Step 2: Suppose $\alpha$ is as in the condition of $\cP^1_p$. the argument at the beginning of Step 1 says there is $\beta$ such that $\iota^*\beta=0$ and $d\beta=\alpha$. 
+Since $\alpha$ consists of 1-forms, $\beta$, as well as $\check\delta\beta$, consist of smooth functions. Since $d\check\delta\beta=\check\delta d\beta=0$ and the domain of each $(\check\delta\beta)_{i_0\ldots i_p}$, if not empty, is connected by condition \ref{condition1_item}, $(\check\delta\beta)_{i_0\ldots i_p}$ are constant functions. 
+Also $\iota^*\check\delta\beta=\check\delta\iota^*\beta=0$, 
+so, by condition \ref{condition2_item} in the lemma, each $(\check\delta\beta)_{i_0\ldots i_p}$ with non-empty domain is 0 at at least one point, hence must be 0. 
+Therefore $\check\delta\beta=0$ and $\beta$ satisfies the requirement in $\cP^1_p$. 
+\end{proof}
+\begin{lmm}\label{cechform2_lmm}
+Suppose $\iota,N,M,\cU$ are as in the condition of Lemma \ref{cechform_lmm}; $p\ge0$,$q\ge1$. Suppose $\alpha\in\check{C}^p_\cU(M;\cA^q)$ satisfies $d\alpha=0$ and $\check\delta\iota^*\alpha=0$, then there exists $\alpha'\in\check{C}^p_\cU(M;\cA^q)$ such that $d\alpha'=0$, $\check\delta\alpha'=0$ and $\iota^*\alpha'=\iota^*\alpha$. 
+\end{lmm}
+\begin{proof}
+We have $d(\check\delta\alpha)=\check\delta d\alpha=0$, $\check\delta(\check\delta\alpha)=0$, and $\iota^*(\check\delta\alpha)=\check\delta\iota^*\alpha=0$. 
+So, applying $\cP^q_{p+1}$ to $\check\delta\alpha$ we obtain $\beta\in\check{C}^{p+1}_\cU(M;\cA^{q-1})$ such that $\check\delta\beta=0$, $\iota^*\beta=0$ and $d\beta=\check\delta\alpha$. 
+Again, let $\{f_i:U_i\to[0,1]\}_{i\in I}$ be a partition of unity subordinate to $\cU$ and we define $\alpha'$ by taking
+$$\alpha'_{i_0\ldots i_p}=\alpha_{i_0\ldots i_p}-\sum_{i\in I}d(f_i\cdot \beta_{ii_0\ldots i_p}),$$
+then $d\alpha'=0$ and $\iota^*\alpha'=\iota^*\alpha-\sum_{i\in I}d((f_i\circ\iota)\cdot\iota^*\beta_{ii_0\ldots i_p})=\iota^*\alpha$. And, similar to (\ref{cech_eqn}), 
+\begin{align*}
+(\check\delta\alpha-\check\delta\alpha'&)_{i_0\ldots i_{p+1}}
+=\sum_{j=0}^{p+1}(-1)^j(\alpha-\alpha')_{i_0\ldots\hat{i}_j\ldots i_{p+1}}
+=\sum_{j=0}^{p+1}(-1)^j\sum_{i\in I}d(f_i\cdot\beta_{ii_0\ldots\hat{i}_j\ldots i_{p+1}})\\
+&=d\sum_{i\in I}\Big(f_i\cdot \sum_{j=0}^{p+1}(-1)^j\beta_{ii_0\ldots\hat{i}_j\ldots i_{p+1}} \Big)
+=d\sum_{i\in I}f_i\cdot (\beta_{i_0\ldots i_{p+1}}-(\check\delta\beta)_{ii_0\ldots i_{p+1}})
+=d\beta_{i_0\ldots i_{p+1}}, 
+\end{align*}
+Therefore, $\check\delta\alpha'=\check\delta\alpha-d\beta=0$, as desired. 
+\end{proof}
+Now we apply Lemma \ref{cechform2_lmm} to our case. 
+\begin{crl}\label{formpatching_crl}
+
+\end{crl}
+
+\end{appendices}
 
 \end{document}

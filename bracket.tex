@@ -440,28 +440,27 @@ For example, a solid cube has 6 codim-1 strata and 12 codim-2 strata. Its bounda
 \item {\it manifold with embedded faces}: \cite[Definition 18]{Hajek}: a manifold with corners such that the closure of every codim-1 strata is an embedded manifold with corners. 
 \end{enumerate}
 
-
-%In this paper, we follow \cite[page 3]{Joyce} for the definition of a smooth manifold with corners.
-%We call a weakly smooth map in \cite[Definition 3.1]{Joyce} between manifolds with corners a smooth map instead.
-%Tangent spaces of manifolds with corner are defined in \cite[Definition 2.2]{Joyce}, and hence tangent bundles, cotangent bundles, and their tensor bundles are defined. 
-%We define differential forms on a manifold with corners to be smooth sections of exterior powers of the cotangent bundle. 
-
-
+%To conveniently talk about the structure of $\partial M$ for a manifold with corners $M$ we also make the following
+%\begin{dfn}
+%A {\it smooth manifold with hinges} is locally modeled on $\R^{a+b+c}_{b,c}:=\R^a\times(\R^{\ge0})^b\times\big((\R^{\ge0})^c\backslash(\R^{>0})^c\big)$, where $a,b,c\in\Z^{\ge0}$. 
+%More precisely: (following \cite[page 3]{Joyce}) a {\it smooth map between subsets $A\subset\R^m$ and $B\subset\R^n$} is a map $f:A\to B$ that can be extended to a smooth map from an open neighborhood $U\subset\R^m$ of $A$ to $B$. 
+%A {smooth map between $\R^{a_1+b_1+c_1}_{b_1,c_1}$ and $\R^{a_2+b_2+c_2}_{b_2,c_2}$} is by viewing $\R^{a_i+b_i+c_i}_{b_i,c_i}$ as subsets of $\R^{a_i+b_i+c_i}$. 
+%\end{dfn} 
 
 
 In this appendix we prove the following 
 \begin{prp}\label{formextension_prp}
-Let $M$ be a compact manifold with embedded faces. 
+Let $M$ be a compact manifold with embedded faces.\footnote{Neither the compactness or embedded faces condition should be necessary; this proposition likely holds for all manifolds with corners. We assume the stronger condition here to shorten the proof.} 
 Suppose for each stratum $S\subset\partial M$ of $M$, $\omega_S$ is a closed differential form of degree $k$ on $\ov{S}$, such that, for each pair of strata $T\subset \ov{S} \subset\partial{M}$, $\omega_T=\omega_S|_{\ov{T}}$. 
 Then, there exists an open neighborhood $U$ of $\partial M$ and a closed differential form $\omega$ on $U$ such that $\omega|_{\ov{S}}=\omega_S$ for all strata $S\subset\partial M$. 
 \end{prp}
 
 In light of Proposition \ref{formextension_prp}, we also define
 \begin{enumerate}[label=$\cdot$, nolistsep]
-\item {\it degree-$k$ differential form on $\partial M$}: a compatible collection of forms, $\{\omega_S\}_S$, as in Proposition \ref{formextension_prp}. 
+\item {\it degree-$k$ differential form on $\partial M$}: a compatible collection of forms, $\{\omega_S\}_S$, as in the assumption of Proposition \ref{formextension_prp}. 
 \end{enumerate}
 \begin{rmk}
-It is easy to see that the $\R$-singular cohomology of $\partial M$ (or more generally, any manifold with corners and ``hinges'') is equivalent to the de Rham cohomology defined using these forms, but we do not need it in the present paper.
+It is easy to see that the $\R$-singular cohomology of $\partial M$ (or more generally, any manifold with corners and ``hinges''\footnote{By ``hinges'' we mean the manifold is locally modeled on $\R^a\times(\R^{\ge0})^b\times\big((\R^{\ge0})^c\backslash(\R^{>0})^c\big)$ for $a,b,c\in\Z^{\ge0}$. One can image a theory of differential forms on such manifolds, defined similar to here.}) is equivalent to the de Rham cohomology defined using these forms, but we do not need it in the present paper.
 \end{rmk}
 
 
@@ -526,15 +525,12 @@ We also still denote by $d$ the termwise differential of forms:  $$d:\check{C}^p
 It is clear that $\check\delta d=d\check\delta$, and both $d$ and $\check\delta$ commute with pull-back maps between manifolds. 
 
 \begin{lmm}\label{cechform_lmm}
-Suppose $N,M$ are smooth manifolds, possibly with boundary and corners, and $\iota: N\to M$ is a smooth map\footnote{%It is not necessary to assume that $\iota$ intersects the boundary and corner strata transversely. 
-In our application of this lemma, $N$ is $\partial M$
-%the union of codim-1 boundary strata of $M$ 
-and $\iota$ is the inclusion map.}. 
+Suppose $M$ is a manifold with corners. Denote $N:=\partial M$ and $\iota: N\to M$ the inclusion map.\footnote{This lemma and Lemma \ref{cechform2_lmm} hold if $N$ is replaced with an arbitrary manifold with corners and $\iota:N\to M$ an arbitrary smooth map.} 
 Suppose $\cU=\{U_i\}_{i\in I}$ is a locally finite open cover of $M$ satisfying the condition that for all subset $I'\subset I$, if $U_{I'}:=\bigcap_{i\in I'}U_i$ is non-empty, then 
 \begin{enumerate}[noitemsep, nolistsep]
 \item \label{condition1_item} all de Rham cohomology groups of $U_{I'}$ are the same as those of a point, 
 \item \label{condition2_item} $\iota^{-1}(U_{I'})\neq\emptyset$, and 
-\item \label{condition3_item} if $\sigma$ is a closed form on $\iota^{-1}(U_{I'})$, then there exists a closed form $\tilde\sigma$ on $U_{I'}$ with $\iota^*\tilde\sigma=\sigma$. 
+\item \label{condition3_item} if $\sigma$ is a closed form\footnote{Differential forms on open subsets of $\partial M$ are defined as in the assumption of Proposition \ref{formextension_prp}.} on $\iota^{-1}(U_{I'})$, then there exists a closed form $\tilde\sigma$ on $U_{I'}$ with $\iota^*\tilde\sigma=\sigma$. 
 \end{enumerate}
 Then, the following proposition $\cP^q_p$ holds for all $p\ge0$,$q\ge1$: 
 \begin{enumerate}[noitemsep, nolistsep, label=$\cP^q_p$:]
@@ -607,10 +603,24 @@ Therefore, $\check\delta\alpha'=\check\delta\alpha-d\beta=0$, as desired.
 
 %Now we show that in our case, the condition of Lemma \ref{cechform2_lmm} can be satisfied. 
 \begin{lmm}\label{cover_lmm}
-Suppose $M$ is a compact manifold with corners. Then, there exist an open neighborhood $U$ of $\partial M$, a finite open cover $\cU$ of $U$, such that $\cU$ satisfies the condition in Lemma \ref{cechform2_lmm} when we plug in $\partial M$ for $N$, $U$ for $M$, and the inclusion map for $\iota$. 
+Suppose $M$ is a compact manifold with embedded faces. Then, there exist an open neighborhood $U$ of $\partial M$, a finite open cover $\cU$ of $U$, such that $\cU$ satisfies the condition in Lemma \ref{cechform2_lmm} when we plug in $\partial M$ for $N$, $U$ for $M$, and the inclusion map for $\iota$. 
 \end{lmm}
+\begin{proof}
+By \cite[Theorem 17]{Hajek}, $M$ has a system of compatible collar neighborhoods (\cite[Definition 35]{Hajek}).\footnote{In our application $M$ is $\wt{C}_n$, and its charts that we explicitly constructed in Section \ref{conftilde_sec} is actually a system of compatible collar neighborhoods.}
+Fix a metric on $M$. 
+For a point $p$ in a depth-$k$ strata $S$, we take a convex neighborhood $U'_p$ of $p$ in $S$ and define $U_p=U'_p\times[0,\epsilon)^k\subset M$ (here we implicitly use the identification given by the collar neighborhood $S\times[0,\epsilon)^k\to M$). 
+Then, for any finite set of points $\{p_i\}$ in $\partial M$, $\cap_iU_{p_i}$ is diffeomorphic to $(\R^{\ge0}))^d\times\R^{\dim{M}-d}$ for some $d$, and $(\cap_iU_{p_i})\cap\partial M\neq\emptyset$.
+So, by Lemma \ref{localformpatching_lmm}, $\cap_iU_i$ satisfied condition \ref{condition3_item} for $U_{I'}$ imposed in Lemma \ref{cechform_lmm}. 
+Take $\cU$ to be a finite subcover of $\{U_p\}_{p\in\partial M}$ and $U=\bigcup_{U_p\in\cU}U_p$. 
+\end{proof}
 
-\cite[Definition 35, Theorem 17]{Hajek}
+\begin{proof}[Proof of Proposition \ref{formextension_prp}]
+Let $U,\cU$ be given as in Lemma \ref{cover_lmm}. 
+Then, for every $V\in\cU$, by Lemma \ref{localformpatching_lmm}, we can find a closed form $\omega_V$ on $V$ such that $\omega_V|_{S\cap V}=\omega_S|_{S\cap V}$ for all strata $S$ of $\partial M$. 
+The collection $\{\omega_V\}_{V\in\cU}$ defines an $\alpha\in\check{C}^0_\cU(M;\cA^k)$, which satisfies the condition of Lemma \ref{cechform2_lmm}. 
+So, there exists $\alpha'$ as in the conclusion of Lemma \ref{cechform2_lmm}. 
+To get to the conclusion of Proposition \ref{formextension_prp}, take $\omega=\alpha'$. 
+\end{proof}
 
 \end{appendices}
 

@@ -904,6 +904,8 @@ It is easy to be convinced that  $$\psi_{T;e}|_{\tn{dom}(T;e)-S_T\times0}:\tn{do
 is smooth. 
 \cmt{Maybe re-write the above in a better way to make this obvious.}
 
+To show $\psi_{T;e}$ has a smooth inverse on a sufficiently small neighborhood of $S_T$: in the case $ls(>v_-(e))$ is non-empty or $ls(v_-(e))=\R^d$, this is clear (the case $ls(v_+(e))=\pi_i$, $ls(v_-(e))=\pi_{3-i}$ follows by how the bracket bundle is constructed); in the case $ls(>v_-(e))$ is empty and $ls(v_-(e))\neq\R^d$, all the difficulty here is, given a collection of points $x_1,\ldots,x_n$ in a small region on a manifold $M$, whether there is a unique point $p\in M$ nearby such that $x_1,\ldots,x_n$ can be obtained from a configuration of points in $T_pM$ by exponential map at $p$. This is precisely the definition of the Riemannian center of mass in \cite{GroveKarcher}. The uniqueness of $p$ is given by \cite[Proposition 3.1]{GroveKarcher}. 
+
 
 \subsection{Smoothing out multiple nodes}
 
@@ -980,6 +982,10 @@ If $A'\subset A$ is a finite subset, then we have an obviously-defined forgetful
 $f_{A,A'}:\wt{C}_A\to\wt{C}_{A'}$ is smooth. \cmt{proof not yet written}
 \end{lmm}
 
+
+\begin{thebibliography}{9}
+\bibitem{GroveKarcher} K. Grove and H. Karcher, {\it How to Conjugate $C^1$-Close Group Actions}, Math. Z., 1973
+\end{thebibliography}
 
 
 \end{document}

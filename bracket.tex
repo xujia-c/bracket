@@ -4,7 +4,7 @@
 \usepackage{enumitem}
 \usepackage[left=1in,right=1in,top=1in,bottom=1in]{geometry}
 \usepackage{tikz}
-\usetikzlibrary{cd,decorations.pathmorphing}
+\usetikzlibrary{cd,calc,intersections,decorations.pathmorphing}
 \usepackage{xcolor}
 \usepackage{sectsty,wrapfig}
 \usepackage{hyperref}
@@ -209,31 +209,280 @@ We define $\ov{C}^*_A=\ov{S}_\sred\cup\ov{S}_\syellow$.
 %${S}_T$ is a 1-parameter family of $\partial \ov{C}_n([\pi_1,\pi_2])$---its interior is diffeomorphic to 
 %$$\partial \ov{C}_n([\pi_1,\pi_2])\times (0,1);$$
 
-\section{Propagators}
+\section{Propagators}\label{propagator_sec}
+
+Before starting the discussion on propagators, we first define a different notion of ``forgetful map''. 
+
+\begin{dfn}\footnote{\textcolor{red}{not great; try to improve the exposition later}}
+Let $T$ be a $\{1,2\}$-labeled tree\footnote{The definition obviously extends to the case of an arbitrary number of marked points and forgetting to an arbitrary subset of marked points, but we only need this simple 2 point case here.}, then $S_T\approx\prod_{v\in V(T)}C_{lp(v)\cup cld(v)}(ls(v))$ is a stratum in $\wt{C}_2$. 
+Let $v_0\in V(T)$ be the vertex such that $lp(\ge v_0)=\{1,2\}$ and for all $v>v_0$, $lp(\ge v)\subsetneq\{1,2\}$. 
+Denote $sp(T):=ls(v_0)$. 
+Define 
+$$\hat{f}_T:S_T\longrightarrow {C}_2(sp(T))\qquad \hat{f}_T\big((c_v)_{v\in V(T)}\big)=c'_{v_0},$$
+where $c'_{v_0}\in C_2(sp(T))$ is obtained from $c_{v_0}$ by forgetting all points except for two: $f_{v_0}(1)$ and $f_{v_0}(2)$. \textcolor{red}{($f_v$ is defined in conftilde, at the beginning of Section 3.3.)}
+
+The above definition extends to $\ov{S}_T$ as well. If $T'$ is a tree such that $S_{T'}\subset\ov{S}_T$, then $T$ can be obtained from $T'$ by contracting some edges (in a unique way). Let $G$ be the subtree of $T'$ consisting of vertices and edges that are contracted to $v_0$.
+Let $V'\subset V(T')$ consist of vertices $v$ such that $\tn{lsset}(ls(v))\cap\tn{lsset}(ls(v_0))=\emptyset$ and $|lp(\ge v)\cap\{1,2\}|<2$. 
+Define $G'$ to be obtained from $G$ by: for each vertex $v$ in $V'\cap G$, contracting the edge just below $v$. 
+Define
+$$\hat{f}_T:S_{T'}\longrightarrow \ov{C}_2(sp(T))\qquad \hat{f}_T\big((c_v)_{v\in V(T')}\big)=(c'_{v})_{v\in V(G')},$$
+where each $c'_{v}\in C_2(ls(v))$ is obtained from $c_v$ by forgetting all points except for two: $f_v(1)$ and $f_v(2)$. 
+We have therefore defined a map 
+$$\hat{f}_T:\ov{S}_T\longrightarrow\ov{C}_2(sp(T)).$$
+It is easy to verify that $\hat{f}_T$ is smooth using the charts we constructed in Section \textcolor{red}{(conftilde section)}. 
+We can make the same definition of $\hat{f}_T$ verbatim with $\wt{C}_2$ replaced by $\ov{C}_2(\pi)$ or $\ov{C}_2(\R^d)$, where $\pi$ is a arbitrary $(M,\infty)$-bundle. 
+\end{dfn}
+
+\textcolor{red}{Maybe introduce more notation when talking about the combinatorics of $A$-labeled trees, e.g., a pre-stable tree and how to get from a pre-stable tree to a stabel tree by contraction.}
+
+\textcolor{red}{(give examples with picture)}
+
+\begin{eg}[in $\wt{C}_2$]
+$T=\begin{tikzpicture}
+\node [below] at (0,0) {\tiny{r}};  
+\node [right, black!60!green] at (0,0) {\tiny{$\pi_1$}};
+\node [left, brown] at (0,0) {\tiny{2}};
+\node [right, black!60!green] at (0,0.5) {\tiny{$\pi_2$}};
+\node [left, brown] at (0,0.5) {\tiny{1}};
+\draw [fill] (0,0) circle [radius=0.02];
+\draw [fill] (0,0.5) circle [radius=0.02];
+\draw (0,0) -- (0,0.5);
+\end{tikzpicture}$, 
+$T'=\begin{tikzpicture}
+\node [below] at (0,0) {\tiny{r}};  
+\node [right, black!60!green] at (0,0) {\tiny{$\pi_1$}};
+\node [left, brown] at (0,0.5) {\tiny{2}};
+\node [left, brown] at (0,1) {\tiny{1}};
+\node [right, black!60!green] at (0,1) {\tiny{$\pi_2$}};
+\draw [fill] (0,0) circle [radius=0.02];
+\draw [fill] (0,0.5) circle [radius=0.02];
+\draw [fill] (0,1) circle [radius=0.02];
+\draw (0,0) -- (0,0.5) -- (0,1);
+\end{tikzpicture}$ 
+(so $S_{T'}\subset\ov{S}_T$), 
+
+$\hat{f}_T($
+\begin{tikzpicture}%[inner sep=0pt]
+%%\draw [name path=pi1] (0,0) to [out=10,in=-20] coordinate[pos=0.5](x) (0.25,1) to [out=160,in=140] coordinate[pos=0.3](y) (0,0) node(z) {}; 
+%\path [name path=pi1] (0,0) to [out=10,in=-20] (0.25,1) to [out=160,in=140] (0,0) node(o) {}; 
+%\draw (o) circle[fill, radius=0.01];
+%\draw [name path=pi2] (0.2,0.7) coordinate(o2) to [out=10,in=-20] ($(o2)+(0.25,1)$) to [out=160,in=140] (o2); 
+%\draw (o2) circle[fill, radius=0.01];
+%\coordinate [name intersections={of=pi1 and pi2, by={a,b}}];
+%***This approach (clip a segment of pi1 and make it gray) may work with the spath3 CTAN package. But anyway***
+
+%\begin{scope}
+%\draw [name path=pi2] (0.2,0.7) coordinate(o2) to [out=10,in=-20] ++(0.25,1) to [out=160,in=140] cycle; 
+%\clip (-1,0) rectangle (2,3) (o2) to [out=10,in=-20] ++(0.25,1) to [out=160,in=140] cycle;
+%\draw (o2) circle[fill, radius=0.01];
+%\draw [name path=pi1] (0,0) to [out=10,in=-20] (0.25,1) to [out=160,in=140] cycle node(o) {}; 
+%\draw (o) circle[fill, radius=0.01];
+%\end{scope}
+%***This is another approach but I don't know how to make the clipped part half opacity
+
+\draw (0,0) to [out=10,in=-20] (0.25,1) to [out=160,in=140] cycle node(o) {}; 
+\draw (o) circle[fill, radius=0.02];
+\filldraw [fill=white, fill opacity=0.8] (0.2,0.7) coordinate(o2) to [out=10,in=-20] ++(0.25,1) to [out=160,in=140] cycle; 
+\draw (o2) circle[fill, radius=0.02];
+\node [black!60!green] at (0.2,0.3) {\tiny{$\pi_1$}};
+\node [black!60!green] at (0.4,1.2) {\tiny{$\pi_2$}};
+\draw [fill, brown] (-.05,0.3) circle [radius=0.02];
+\node [brown] at (-.2,0.3) {\tiny{1}};
+\draw [fill, brown] (.3,1.5) circle [radius=0.02];
+\node [brown] at (.5,1.5) {\tiny{2}};
+\end{tikzpicture}
+$)=$
+\begin{tikzpicture}
+\draw [name path=pi1] (0,0) to [out=10,in=-20] (0.25,1) to [out=160,in=140] cycle node(o) {}; 
+\draw (o) circle[fill, radius=0.02];
+\node [black!60!green] at (0.2,0.3) {\tiny{$\pi_1$}};
+\draw [fill, brown] (-.05,0.3) circle [radius=0.02];
+\node [brown] at (-.2,0.3) {\tiny{1}};
+\draw [fill, brown] (0.2,0.7) circle [radius=0.02];
+\node [brown] at (.35,.7) {\tiny{2}};
+\end{tikzpicture},
+\quad $\hat{f}_T($
+\begin{tikzpicture}
+\draw (0,0) to [out=10,in=-20] (0.25,1) to [out=160,in=140] cycle node(o) {}; 
+\draw (o) circle[fill, radius=0.02];
+\draw (-0.2,1.1) to [out=-10,in=100] ++(0.3,-0.3) node(o2){} to [out=80,in=190] ++(0.3,0.3);
+\draw (o2) circle[fill, radius=0.02];
+\filldraw [fill=white, fill opacity=0.8] ($(o2)+(-0.6,0.3)$) -- ++(1,0) -- ++(0.5,0.3) -- ++(-1,0) --cycle;
+\filldraw [fill=white, fill opacity=0.8] (0,1.3) coordinate(o3) to [out=20,in=10] ++(-.25,1) to [out=200,in=160] cycle; 
+\draw (o3) circle[fill, radius=0.02];
+\node [black!60!green] at (0.2,0.3) {\tiny{$\pi_1$}};
+\node [black!60!green] at ($(o3)+(0,0.45)$) {\tiny{$\pi_2$}};
+\draw [fill, brown] ($(o3)+(-0.2,0.6)$) node(p1){} circle [radius=0.02];
+\node [brown] at ($(p1)+(-0.15,0)$) {\tiny{1}};
+\draw [fill, brown] ($(o2)+(.4,0.5)$) node(p2){} circle [radius=0.02];
+\node [brown] at ($(p2)+(0.15,0)$) {\tiny{2}};
+\end{tikzpicture}
+$)=$
+\begin{tikzpicture}
+\draw (0,0) to [out=10,in=-20] (0.25,1) to [out=160,in=140] cycle node(o) {}; 
+\draw (o) circle[fill, radius=0.02];
+\draw (-0.2,1.1) to [out=-10,in=100] ++(0.3,-0.3) node(o2){} to [out=80,in=190] ++(0.3,0.3);
+\draw (o2) circle[fill, radius=0.02];
+\filldraw [fill=white, fill opacity=0.8] ($(o2)+(-0.6,0.3)$) -- ++(1,0) -- ++(0.5,0.3) -- ++(-1,0) --cycle;
+\node [black!60!green] at (0.2,0.3) {\tiny{$\pi_1$}};
+\draw [fill,brown] (0,1.3) node(p1){} circle [radius=0.02];
+\node [brown] at ($(p1)+(0.15,0)$) {\tiny{1}};
+\draw [fill, brown] ($(o2)+(.4,0.5)$) node(p2){} circle [radius=0.02];
+\node [brown] at ($(p2)+(0.15,0)$) {\tiny{2}};
+\end{tikzpicture},
+\quad $\hat f_{T'}($
+\begin{tikzpicture}
+\draw (0,0) to [out=10,in=-20] (0.25,1) to [out=160,in=140] cycle node(o) {}; 
+\draw (o) circle[fill, radius=0.02];
+\draw (-0.2,1.1) to [out=-10,in=100] ++(0.3,-0.3) node(o2){} to [out=80,in=190] ++(0.3,0.3);
+\draw (o2) circle[fill, radius=0.02];
+\filldraw [fill=white, fill opacity=0.8] ($(o2)+(-0.6,0.3)$) -- ++(1,0) -- ++(0.5,0.3) -- ++(-1,0) --cycle;
+\filldraw [fill=white, fill opacity=0.8] (0,1.3) coordinate(o3) to [out=20,in=10] ++(-.25,1) to [out=200,in=160] cycle; 
+\draw (o3) circle[fill, radius=0.02];
+\node [black!60!green] at (0.2,0.3) {\tiny{$\pi_1$}};
+\node [black!60!green] at ($(o3)+(0,0.45)$) {\tiny{$\pi_2$}};
+\draw [fill, brown] ($(o3)+(-0.2,0.6)$) node(p1){} circle [radius=0.02];
+\node [brown] at ($(p1)+(-0.15,0)$) {\tiny{1}};
+\draw [fill, brown] ($(o2)+(.4,0.5)$) node(p2){} circle [radius=0.02];
+\node [brown] at ($(p2)+(0.15,0)$) {\tiny{2}};
+\end{tikzpicture}
+$)=$
+\begin{tikzpicture}
+%\node(o2) at (0.1,0.8) {}; 
+\filldraw [fill=white, fill opacity=0.8] ($(0.1,0.8)+(-0.6,0.3)$) -- ++(1,0) -- ++(0.5,0.3) -- ++(-1,0) --cycle;
+\draw [fill,brown] (0,1.3) node(p1){} circle [radius=0.02];
+\node [brown] at ($(p1)+(-0.15,0)$) {\tiny{1}};
+\draw [fill, brown] ($(o2)+(.4,0.5)$) node(p2){} circle [radius=0.02];
+\node [brown] at ($(p2)+(0.15,0)$) {\tiny{2}};
+\end{tikzpicture}. 
+\end{eg}
+
+\begin{eg}[in $\ov{C}_2(\pi)$, where $\pi$ is an $(M,\infty)$-bundle]
+$T_1=$
+\begin{tikzpicture}
+\node [below] at (0,0) {\tiny{r}};  
+\node [right, black!60!green] at (0,0) {\tiny{$\pi$}};
+\node [right, brown] at (0,0.5) {\tiny{1,2}};
+\draw [fill] (0,0) circle [radius=0.02];
+\draw [fill] (0,0.5) circle [radius=0.02];
+\draw (0,0) -- (0,0.5);
+\end{tikzpicture}, 
+$T_2=$
+\begin{tikzpicture}
+\node [below] at (0,0) {\tiny{r}};  
+\node [right, brown] at (0,0) {\tiny{1,2}};
+\node [right, black!60!green] at (0,0.5) {\tiny{$\pi$}};
+\draw [fill] (0,0) circle [radius=0.02];
+\draw [fill] (0,0.5) circle [radius=0.02];
+\draw (0,0) -- (0,0.5);
+\end{tikzpicture}, 
+$T_3=$
+\begin{tikzpicture}
+\node [below] at (0,0) {\tiny{r}};  
+\node [left, brown] at (0,0) {\tiny{2}};
+\node [right, black!60!green] at (0,0.5) {\tiny{$\pi$}};
+\node [left, brown] at (0,0.5) {\tiny{1}};
+\draw [fill] (0,0) circle [radius=0.02];
+\draw [fill] (0,0.5) circle [radius=0.02];
+\draw (0,0) -- (0,0.5);
+\end{tikzpicture},
+
+$\hat{f}_{T_1}($
+\begin{tikzpicture}
+\draw (0,0) to [out=10,in=-20] (0.25,1) to [out=160,in=140] cycle node(o) {}; 
+\draw (o) circle[fill, radius=0.02];
+\draw (-0.2,1.1) to [out=-10,in=100] ++(0.3,-0.3) node(o2){} to [out=80,in=190] ++(0.3,0.3);
+\draw (o2) circle[fill, radius=0.02];
+\filldraw [fill=white, fill opacity=0.8] ($(o2)+(-0.6,0.3)$) -- ++(1,0) -- ++(0.5,0.3) -- ++(-1,0) --cycle;
+\node [black!60!green] at (0.2,0.3) {\tiny{$\pi$}};
+\draw [fill,brown] (0,1.3) node(p1){} circle [radius=0.02];
+\node [brown] at ($(p1)+(0.15,0)$) {\tiny{1}};
+\draw [fill, brown] ($(o2)+(.4,0.5)$) node(p2){} circle [radius=0.02];
+\node [brown] at ($(p2)+(0.15,0)$) {\tiny{2}};
+\end{tikzpicture}
+$)=$
+\begin{tikzpicture}
+%\node(o2) at (0.1,0.8) {}; 
+\filldraw [fill=white, fill opacity=0.8] ($(0.1,0.8)+(-0.6,0.3)$) -- ++(1,0) -- ++(0.5,0.3) -- ++(-1,0) --cycle;
+\draw [fill,brown] (0,1.3) node(p1){} circle [radius=0.02];
+\node [brown] at ($(p1)+(0.15,0)$) {\tiny{1}};
+\draw [fill, brown] ($(o2)+(.4,0.5)$) node(p2){} circle [radius=0.02];
+\node [brown] at ($(p2)+(0.15,0)$) {\tiny{2}};
+\end{tikzpicture}, 
+\quad$\hat{f}_{T_2}($
+\begin{tikzpicture}
+\filldraw [fill=white, fill opacity=0.8] ($(-0.7,-0.2)$) -- ++(1,0) -- ++(0.5,0.3) -- ++(-1,0) --cycle;
+\filldraw [fill=white, fill opacity=0.8] (0,0) coordinate(o2) to [out=10,in=-20] ++(0.25,1) to [out=160,in=140] cycle; 
+\draw (o2) circle[fill, radius=0.02];
+\node [black!60!green] at ($(o2)+(0.2,0.5)$) {\tiny{$\pi$}};
+\draw [fill,brown] (-0.3,-0.1) node(p1){} circle [radius=0.02];
+\node [brown] at ($(p1)+(-0.15,0)$) {\tiny{1}};
+\draw [fill, brown] (0.3,0) node(p2){} circle [radius=0.02];
+\node [brown] at ($(p2)+(0.15,0)$) {\tiny{2}};
+\end{tikzpicture}
+$)=$
+\begin{tikzpicture}
+\filldraw [fill=white, fill opacity=0.8] ($(-0.7,-0.2)$) -- ++(1,0) -- ++(0.5,0.3) -- ++(-1,0) --cycle;
+\draw [fill,brown] (-0.3,-0.1) node(p1){} circle [radius=0.02];
+\node [brown] at ($(p1)+(-0.15,0)$) {\tiny{1}};
+\draw [fill, brown] (0.3,0) node(p2){} circle [radius=0.02];
+\node [brown] at ($(p2)+(0.15,0)$) {\tiny{2}};
+\end{tikzpicture}, 
+\quad$\hat{f}_{T_3}($
+\begin{tikzpicture}
+\filldraw [fill=white, fill opacity=0.8] ($(-0.7,-0.2)$) -- ++(1,0) -- ++(0.5,0.3) -- ++(-1,0) --cycle;
+\filldraw [fill=white, fill opacity=0.8] (0,0) coordinate(o2) to [out=10,in=-20] ++(0.25,1) to [out=160,in=140] cycle; 
+\draw (o2) circle[fill, radius=0.02];
+\node [black!60!green] at ($(o2)+(0.2,0.5)$) {\tiny{$\pi$}};
+\draw [fill,brown] (0.1,0.7) node(p1){} circle [radius=0.02];
+\node [brown] at ($(p1)+(-0.15,0)$) {\tiny{1}};
+\draw [fill, brown] (0.3,0) node(p2){} circle [radius=0.02];
+\node [brown] at ($(p2)+(0.15,0)$) {\tiny{2}};
+\end{tikzpicture}
+$)=$
+\begin{tikzpicture}
+\filldraw [fill=white, fill opacity=0.8] ($(-0.7,-0.2)$) -- ++(1,0) -- ++(0.5,0.3) -- ++(-1,0) --cycle;
+\draw [fill,brown] (0,0) node(p1){} circle [radius=0.02];
+\node [brown] at ($(p1)+(-0.15,0)$) {\tiny{1}};
+\draw [fill, brown] (0.3,0) node(p2){} circle [radius=0.02];
+\node [brown] at ($(p2)+(0.15,0)$) {\tiny{2}};
+\end{tikzpicture}. 
+
+Note that $S_{T_1},S_{T_2},S_{T_3}$ are the only codimension-1 strata of $\ov{C}_2(\pi)$, and the codomain of $\hat{f}_{T_1}$, $\hat{f}_{T_2}$, $\hat{f}_{T_3}$ are all $\ov{C}_2(\R^d)$. 
+\end{eg}
+
+\begin{dfn}\label{propagator_dfn}
+Suppose $M$ is a $d$-dimensional $\Z$-homology sphere and $\pi$ is an $(M,\infty)$-bundle. 
+A {\it propagator} on $\ov{C}_2(\pi)$ (resp. $\ov{C}_2(\R^d)$) is a closed $(d-1)$-form $\omega$ satisfying: there exists a $(d-1)$-form $\omega_0$ on $S^{d-1}\approx\ov{C}_2(\R^d)$ such that $\int_{S^{d-1}}\omega_0=1$ and for every codimension-1 stratum $S\subset\partial\ov{C}_2(\pi)$ (resp. $S\subset\partial\ov{C}_2(\R)$), $\omega|_{S}=\hat{f}_S^*\omega_0$. 
+\end{dfn}
+
+This definition is phrased differently from the usual definition of a propagator, see e.g. \cite[Definition 3.9]{Lescop} or \cite[Lemma 2.12]{WatanabeAddendum}, but can easily be seen as equivalent. 
 
 Fix a volume form $\omega_0$ on $S^{d-1}$. 
-For $i=1,2$, fix a propagator $\omega_i$ on $\ov{C}_2(\pi_i)$ such that on $\partial\ov{C}_2(\pi_i)$, $\omega_i$ is given by $\omega_0$. 
+By \cite[Lemma 2.12]{WatanabeAddendum}, there exist propagators $\omega_1$ on $\ov{C}_2(\pi_1)$, $\omega_2$ on $\ov{C}_2(\pi_2)$, and $\omega$ on $\ov{C}_2([\pi_1,\pi_2])$ such that the above condition in Definition \ref{propagator_dfn} is satisfied with this $\omega_0$. We choose and fix such $\omega_1,\omega_2,\omega$. 
 
-\subsection{Propagator on confstar}
+In the rest of this section we construct a ``propagator'' on $\partial\wt{C}_2$. 
+This is done in two steps: 
+\begin{enumerate}
+\item \label{step1_item} On each stratum $S$ of $\partial\wt{C}_2$, construct a closed $(d-1)$-form $\omega_S$ on $\ov{S}$, such that, for two strata $S'\subset\ov{S}$, $\omega_S|_{\ov{S}'}=\omega_{S'}$. 
+\item \label{step2_item} Show that this collection $\{\omega_S\}_S$ extends to a closed form $\wt\omega$ on $\wt{C}_2$; namely, $\wt\omega$ is such that $\wt\omega|_{S}=\omega_S$ for every strata $S\subset\partial\wt{C}_2$. 
+\end{enumerate}
 
-$\omega_1,\omega_2$ naturally induce a propagator $\omega_*$ on $\ov{C}^*_2$. On the main strata of $\ov{C}^*_2$, define $\omega_*$ as follows: 
-\begin{itemize}
-\item On the stratum $S_{11}$ consisting of  \includegraphics[scale=0.4]{mouse11}, 
-there is the forgetful map
-$f_{11}:S_{11}\to \ov{C}_2(\pi_1)$. We define $\omega_*|_{S_{11}}=f_{11}^*(\omega_1)$. 
+{\bf Step \ref{step1_item}}: 
+All strata in $\ov{S}_{\sred}\cup \ov{S}_{\syellow}\cup \ov{S}_{\sblue}\subset\partial\wt{C}^*_2$ are of the form $S_T$ for a unique $\{1,2\}$-labeled tree $T$ with at least one edge. 
+Define $\omega_{S_T}=\hat{f}_T^*\omega_i$, where $i=1$ if $sp(T)=\pi_1$, $i=2$ if $sp(T)=\pi_2$, $i=0$ if $sp(T)=\R^d$, and remove the subscript $i$ if $sp(T)=[\pi_1,\pi_2]$. 
+On the remaining part $\ov{S}_\sgray$ of $\partial\wt{C}_2$, which is one single stratum, define $\omega_{S_\sgray}=\omega$, under the natural identification $\ov{S}_\sgray\approx\ov{C}_2([\pi_1,\pi_2])$. 
+This defines the collection $\{\omega_S\}_{S}$.
+Now we need to show the compatibility condition:
+for $S'\subset\ov{S}$, $\omega_S|_{\ov{S}'}=\omega_{S'}$. 
+Since $\omega_{S}, \omega_{S'}$ are continuous, it suffices to show equality on the open part:  $\omega_S|_{S'}=\omega_{S'}|_{S'}$.  
 
-\item On the stratum $S_{22}$ consisting of  \includegraphics[scale=0.4]{mouse22}, 
-there is the forgetful map
-$f_{22}:S_{22}\to \ov{C}_2(\pi_2)$. We define $\omega_*|_{S_{22}}=f_{22}^*(\omega_2)$. 
 
-\item On the stratum $S_{12}$ consisting of  \includegraphics[scale=0.4]{mouse12}, 
-there is the forgetful map
-$f_{12}:S_{12}\to \ov{C}_2(\pi_1)$, where the second marked point is considered to be located at the node on $\pi_1$.  
-We define $\omega_*|_{S_{22}}=f_{22}^*(\omega_2)$.
+For two trees $T',T$ such that $S_{T'}\subset \ov{S}_T$, the compatibility condition we need to show becomes $\hat{f}_T^*\omega|_{\ov{S}_{T'}}=\hat{f}_{T'}^*\omega$. 
 
-\item ...(There are 5 more situations, all variations of the above, permuting $\pi_1,\pi_2, 1,2$.) 
-\end{itemize}
 
+~\\
+~\\
 We then check that the above definitions are compatible when the main strata glue together. 
 For example, the stratum $S'$ consisting of 
 \includegraphics[scale=0.4]{S11capS22} lies in the intersection of $\ov{S}_{11}$ and $\ov{S}_{22}$;
@@ -256,7 +505,7 @@ We may need to check higher-codimension strata as well but it shouldn't be hard.
 %In our situation, this stronger compatibility condition should be achievable as well, if we impose a similar condition (``parallel to boundary'' near the boundary) on $\omega_1,\omega_2$. 
 %\end{rmk} 
 
-\subsection{Propagator on other parts of the boundary of conftilde}
+\subsection{Propagator on other parts of the boundary of conftilde}\label{propagator2_sec}
 
 To define a propagator on the blue part of $\partial\wt{C}_2$, we have no choice but to define it as induced from $\omega_0$ in the usual way. 
 
@@ -264,7 +513,7 @@ To define a propagator in the gray part of $\partial\wt{C}_2$, we just choose an
 
 Now we have defined a propagator on all of $\partial\wt{C}_2$. 
 
-\subsection{Extend the propagator to the interior}
+\subsection{Extend the propagator to the interior}\label{propagatorext_sec}
 
 
 \begin{lmm}
@@ -627,10 +876,17 @@ To get to the conclusion of Proposition \ref{formextension_prp}, take $\omega=\a
 \begin{thebibliography}{99}
 \bibitem{BottTu} R. Bott and L. Tu, {\it Differential Forms in Algebraic Topology}, Springer, 1982
 
+\bibitem{GroveKarcher} K. Grove and H. Karcher, {\it How to Conjugate $C^1$-Close Group Actions}, Math. Z., 1973
+
 \bibitem{Hajek} P. H\'ajek, {\it On manifolds with corners}, Master's Thesis, Ludwig Maximilian University of Munich, 2014
 
-
 \bibitem{Joyce} D. Joyce, {\it On manifolds with corners}, arxiv/0910.3518v2
+
+\bibitem{Lescop} C. Lescop {\it Invariants of links and 3–manifolds from graph configurations}, arxiv/2001.09929v2
+
+\bibitem{WatanabeAddendum} T. Watanabe {\it Addendum to: some exotic nontrivial elements of
+the rational homology groups of $\tn{Diff}(S^4)$
+(homological interpretation)}, arxiv/2109.01609v3
 \end{thebibliography}
 
 \end{document}

@@ -713,54 +713,110 @@ We choose and fix such an extension $\wt\omega$ on $\wt{C}_2$.
 
 \section{Configuration space integrals}
 
-For simplicity here we will only sketch part of the proof of Theorem \ref{formula_thm}, namely we only justify the first term on the RHS. 
-(The second term is slightly more complicated but not much: basically because we only work with the point class on $S^d$---it is only 0-dimensional so you can still easily achieve transversality as needed. The second term is not needed for the corollary about the loop space structure on $\tn{BDiff}^{\tn{fr}}_\partial(D^d)$ either.) 
+Note that $B_I$ as defined in conftilde Section 2.4 admits a submersion $\pi_{B_I}:B_I\to B_1\times B_2$, making $B_I$ a smooth fiber bundle (whose fibers are manifolds with corners) over $B_1\times B_2$. Each fiber is homeomorphic to $S^d\times [0,\rho)$ and looks like the picture on page 10 of conftilde. 
+The map $\pi_{B_I}\circ\tilde{\pi}^A:\wt{C}_A\to B_1\times B_2$, and its restriction to every strata of $\wt{C}_A$, are also submersions. 
+
+The base $B$ of $[\pi_1,\pi_2]$ is $B_{t_0}$, 
+the total space of the subbundle of $B_I$ obtained by taking the subspace $S^d\times \{t_0\}\subset S^d\times[0,\rho)$ of each fiber. So, the fibers are diffeomorphic to $S^d$. 
+Indeed, the fiber bundle $B\to B_1\times B_2$ is trivial when regarded as a topological fiber bundle; namely, $B$ is homeomorphic to $S^d\times B_1\times B_2$. So, 
+%With the Leray-Serre spectral sequence we compute 
+$H^*(B)\approx H^*(S^d)\otimes H^*(B_1)\otimes H^*(B_2)$. 
+
+
+
+We have the following diagram: 
+\[
+\begin{tikzcd}
+\ov{C}_A([\pi_1,\pi_2])\rar[hook]\dar["\pi_{[]}^A"] & \wt{C}_A\dar["\tilde\pi^A"]\\
+B_{t_0}\rar[hook]\drar["\pi_{B_I}|_{B_{t_0}}"'] & B_I\dar["\pi_{B_I}"] \\
+ & B_1\times B_2
+\end{tikzcd},
+\]
+where $\pi_{[]}^A$, $\pi_{B_I}$ are submersions but not $\tilde\pi^A$. 
+
+\begin{lmm}
+Let $A'\subset A$ be finite sets and $\ff_{A',A}:\wt{C}_{A}\to\wt{C}_{A'}$ the forgetful map forgetting all marked points not in $A'$. 
+Then, for every (open) stratum $S$ of $\wt{C}_{A}$, $\ff_{A',A}(S)$ is again an open stratum of $\wt{C}_{A'}$ and 
+$$\ff_{A',A}|_S:S\longrightarrow \ff_{A',A}(S)$$
+is a submersion. 
+\end{lmm}
+
+In particular, when $A'=\emptyset$, this holds with $\wt{C}_{A'}=B_I$ and $\ff_{A',A}=\tilde{\pi}$. 
+
+\cmt{Something about the above should be in the conftilde section.}
+
 
 Suppose $\sum_{i=1}^{m}\Gamma_i$ is a cocycle in graph cohomology. 
 For every edge $e$ of some $\Gamma_i$, we have the forgetful map 
 $$\ff_e:\wt{C}_{V(\Gamma_i)}\longrightarrow\wt{C}_2.$$
 And, when restricted to $\ov{S}_{\sgray}\subset\wt{C}_{V(\Gamma_i)}$ (resp. $\ov{C}_{V(\Gamma_i)}^*\subset\wt{C}_{V(\Gamma_i)}$), it is the forgetful map
-$$f_e:\ov{C}_{V(\Gamma_i)}([\pi_1,\pi_2])\longrightarrow\ov{C}_2([\pi_1,\pi_2]) \qquad (\tn{resp. } f_e:\ov{C}^*_{V(\Gamma_i)}\longrightarrow\ov{C}^*_2).$$
-Now we have the form $\bigwedge_{e\in E(\Gamma_i)}f_e^*\wt{\omega}$ on $\wt{C}_{V(\Gamma_i)}$. 
+$$\ff_e:\ov{C}_{V(\Gamma_i)}([\pi_1,\pi_2])\longrightarrow\ov{C}_2([\pi_1,\pi_2]) \qquad (\tn{resp. } \ff_e:\ov{C}^*_{V(\Gamma_i)}\longrightarrow\ov{C}^*_2).$$
+Now we have the form $\bigwedge_{e\in E(\Gamma_i)}\ff_e^*\wt{\omega}$ on $\wt{C}_{V(\Gamma_i)}$. 
 Recall that by the definition of Kontsevich's characteristic classes, 
-$$K_{[\pi_1,\pi_2]}\big(\big[\sum_{i=1}^m\Gamma_i\big]\big)=\sum_{i=1}^m\int_{\ov{S}_{\sgray}}\bigwedge_{e\in E(\Gamma_i)}f_e^*\wt{\omega}|_{\ov{S}_{\sgray}}.$$
+$$K_{[\pi_1,\pi_2]}\big(\big[\sum_{i=1}^m\Gamma_i\big]\big)=
+\big[\sum_{i=1}^m (\pi_{[]}^{V(\Gamma_i)})_*\bigwedge_{e\in E(\Gamma_i)}\ff_e^*{\omega}\big]\in H^*(B)\approx H^*(S^d)\otimes H^*(B_1)\otimes H^*(B_2).
+%\sum_{i=1}^m\int_{\ov{S}_{\sgray}}\bigwedge_{e\in E(\Gamma_i)}\ff_e^*\wt{\omega}|_{\ov{S}_{\sgray}}.
+$$
+To determine $K_{[\pi_1,\pi_2]}\big(\big[\sum_{i=1}^m\Gamma_i\big]\big)$, it suffices to determine the intersection pairing 
+$$\big\langle K_{[\pi_1,\pi_2]}\big(\big[\sum_{i=1}^m\Gamma_i\big]\big), \alpha_0\otimes\alpha_1\otimes\alpha_2\big\rangle$$
+for all homology classes $\alpha_0\in H_*(S^d)$, $\alpha_1\in H_*(B_1)$ and $\alpha_2\in H_*(B_2)$. 
+Below, we discuss the two cases $\alpha_0=[\tn{point}]$ and $\alpha_0=[S^d]$ separately. 
 
-To compute the ($\tn{PD}_{S^d}[S^d]$)-part of $K_{[\pi_1,\pi_2]}([\sum_{i=1}^m\Gamma_i])$, we only need to compute, given arbitrary homology classes $\alpha_1\in H_*(B_1)$ and $\alpha_2\in H_*(B_2)$, the evaluation
-$$\big\langle K_{[\pi_1,\pi_2]}([\sum_{i=1}^m\Gamma_i]), [S^d]\otimes\alpha_1\otimes\alpha_2 \big\rangle.$$
-For $j=1,2$, suppose $\alpha_j$ is represented by a
-piecewise-smooth singular chain $\sum_{t}\iota^t_j$, where $\iota^t_j$ is some smooth map from the standard $\deg(\alpha_j)$-dimensional simplex $\Delta^{\deg(\alpha_j)}$ to $B_i$. 
+\subsection*{Case I: $\alpha_0=[S^d]$}
 
-Notice that, for any finite set $A$, the projection map 
-$\wt{p}:\wt{C}_A\to B_1\times B_2$
-is a fiber bundle, and so is the restriction of $\wt{p}$ to each stratum of $\wt{C}_A$.
-So we can form the pull-backs $(\iota^j_t)^*\wt{C}_A,(\iota^j_t)^*\ov{C}_A([\pi_1,\pi_2]),(\iota^j_t)^*\ov{C}^*_A$. 
+For $a=1,2$, suppose $\deg\alpha_a=k_a$ and $\alpha_a$ is represented by a piecewise-smooth singular chain $\sum_{j_a}\iota^{j_a}_a$, 
+where $\iota^{j_a}_a$ are smooth maps from the standard $k_a$-dimensional simplex $\Delta^{k_a}$ to $B_a$. 
 
-Now, we have 
-\begin{align}
+Since for all finite set $A$,
+$\pi_{B_I}\circ\tilde{\pi}^A:\wt{C}_A\to B_1\times B_2$
+and its restriction to every stratum is a fiber bundle, 
+we can form the pullback bundles $(\iota_1^{j_1},\iota_2^{j_2})^*\wt{C}_A$, $(\iota_1^{j_1},\iota_2^{j_2})^*\ov{C}_A([\pi_1,\pi_2])$ ,$(\iota_1^{j_1},\iota_2^{j_2})^*\ov{C}^*_A$ over $\Delta^{k_1}\times\Delta^{k_2}$. 
+
+For convenience, in this section we use $\ov{S}_{\sgray}^i$ to denote the $\ov{S}_{\sgray}$ in $\wt{C}_{V(\Gamma_i)}$, and same for the other colors (red, orange, yellow, blue) instead of gray. 
+
+We then have 
+\begin{equation}
 \label{integral_eqn}
 \big\langle K_{[\pi_1,\pi_2]}([\sum_{i=1}^m\Gamma_i]), [S^d]\otimes\alpha_1\otimes\alpha_2 \big\rangle=
-\sum_{i,j,t}\int_{(\iota_t^j)^*\ov{C}_{V(\Gamma_i)}([\pi_1,\pi_2])}\bigwedge_{e}f_e^*{\omega}=
-\int_{(\iota^j_t)^*\ov{S}_{\sgray}}\bigwedge_{e}f_e^*\wt{\omega}.
+\sum_{i,j_1,j_2}\int_{(\iota_1^{j_1},\iota_2^{j_2})^*\ov{C}_{V(\Gamma_i)}([\pi_1,\pi_2])}\bigwedge_{e}\ff_e^*{\omega}=
+\sum_{i,j_1,j_2}\int_{(\iota_1^{j_1},\iota_2^{j_2})^*\ov{S}_{\sgray}^i}\bigwedge_{e}\ff_e^*\wt{\omega}.
+\end{equation}
+Since 
+\[
+\partial\big((\iota_1^{j_1},\iota_2^{j_2})^*\wt{C}_{V(\Gamma_i)}\big)=(\iota_1^{j_1},\iota_2^{j_2})^*\partial\wt{C}_{V(\Gamma_i)}+\big((\iota_1^{j_1},\iota_2^{j_2})^*\wt{C}_{V(\Gamma_i)}\big)\big|_{\partial(\Delta^{k_1}\times\Delta^{k_2})}, 
+\]
+by Stocks' Formula, 
+\begin{align*}
+\int_{(\iota_1^{j_1},\iota_2^{j_2})^*\partial\wt{C}_{V(\Gamma_i)}}\bigwedge_{e}&\ff_e^*\wt{\omega}=
+\int_{\partial(\iota_1^{j_1},\iota_2^{j_2})^*\wt{C}_{V(\Gamma_i)}}\bigwedge_{e}\ff_e^*\wt{\omega}-
+\int_{(\iota_1^{j_1},\iota_2^{j_2})^*\wt{C}_{V(\Gamma_i)}|_{\partial(\Delta^{k_1}\times\Delta^{k_2})}}\bigwedge_{e}\ff_e^*\wt{\omega}\\
+=\int_{(\iota_1^{j_1},\iota_2^{j_2})^*\wt{C}_{V(\Gamma_i)}}&d\Big(\bigwedge_{e}\ff_e^*\wt{\omega}\Big)-
+\int_{(\iota_1^{j_1},\iota_2^{j_2})^*\wt{C}_{V(\Gamma_i)}|_{\partial\Delta^{k_1}\times\Delta^{k_2}}}\bigwedge_{e}\ff_e^*\wt{\omega}\pm
+\int_{(\iota_1^{j_1},\iota_2^{j_2})^*\wt{C}_{V(\Gamma_i)}|_{\Delta^{k_1}\times\partial\Delta^{k_2}}}\bigwedge_{e}\ff_e^*\wt{\omega}.
+\end{align*}
+The first term is 0 because $\wt{\omega}$ is closed.  
+Because the singular chains $\sum_{j_1}\iota_1^{j_1}$, $\sum_{j_2}\iota_2^{j_2}$ are cycles, when summing over all $j_1$, the second term is 0; when summing over all $j_2$, the third term is 0. 
+So, 
+$$(\ref{integral_eqn})=\sum_{i,j_1,j_2}\Big(\int_{(\iota_1^{j_1},\iota_2^{j_2})^*\ov{S}_{\sblue}^i}\bigwedge_{e}\ff_e^*\wt{\omega}+\int_{(\iota_1^{j_1},\iota_2^{j_2})^*\ov{C}^*_{V(\Gamma_i)}}\bigwedge_{e}\ff_e^*{\wt\omega}\Big).$$
+Since $\sum_{i}\Gamma_i$ is a cocycle in graph cohomology, the first term is 0 just like in the proof of the well-definedness of Kontsevich's classes\footnote{
+The argument goes as follows: a top-dimensional stratum $S$ of $\ov{S}_{\sblue}^i$ contains a screen with space label $\R^d$, consider 3 separate cases: \cmt{...}
+}, 
+so
+\begin{align}\label{confstarintegral_eqn}
+\big\langle K_{[\pi_1,\pi_2]}([\sum_i\Gamma_i]), [S^d]\otimes\alpha_1\otimes\alpha_2 \big\rangle=
+\sum_{i,j_1,j_2}\int_{(\iota_1^{j_1},\iota_2^{j_2})^*\ov{C}^*_{V(\Gamma_i)}}\bigwedge_{e}\ff_e^*{\wt\omega}\nonumber\\
+=
+\sum_{i,j_1,j_2}\int_{(\iota_1^{j_1},\iota_2^{j_2})^*{S}_{\sred}^i}\bigwedge_{e}\ff_e^*{\wt\omega}+
+\sum_{i,j_1,j_2}\int_{(\iota_1^{j_1},\iota_2^{j_2})^*{S}_{\syellow}^i}\bigwedge_{e}\ff_e^*{\wt\omega}.
 \end{align}
-By Stocks' Formula (and the fact that $\wt\omega$ is closed), 
-$$\int_{\partial\wt{C}_{V(\Gamma)}}\bigwedge_{e}f_e^*\wt{\omega}=\int_{\wt{C}_{V(\Gamma)}}d\Big(\bigwedge_{e}f_e^*\wt{\omega}\Big)=0,$$
-so, 
-$$(\ref{integral_eqn})=\int_{\tn{blue part of }\partial\wt{C}_{V(\Gamma)}}\bigwedge_{e}f_e^*\wt{\omega}+\int_{\ov{C}^*_{V(\Gamma)}}\bigwedge_{e}f_e^*{\omega_*}.$$
-Since $\Gamma$ is a cocycle in graph cohomology, the first term is 0 just like in the proof of the well-definedness of Kontsevich's classes, so
-$$\big\langle K_{[\pi_1,\pi_2]}([\Gamma]), [S^d]\otimes\alpha_1\otimes\alpha_2 \big\rangle=
-\int_{\ov{C}^*_{V(\Gamma)}}\bigwedge_{e}f_e^*{\omega_*}.$$
 
-\section{Configuration space integral on confstar}
 
-We continue with the notation from last section (in particular, everything is over $B'_1, B'_2$ instead of $B_1, B_2$). 
 
 It remains to show that 
 \begin{equation}\label{stardecompose_eqn}
-\big\langle (K_{\pi_1}\otimes K_{\pi_2})(\Delta_{[,]}[\Gamma]), \alpha_1\otimes\alpha_2 \big\rangle=
-\int_{\ov{C}^*_{V(\Gamma)}}\bigwedge_{e}f_e^*{\omega_*}. 
+(\ref{confstarintegral_eqn})=\big\langle (K_{\pi_1}\otimes K_{\pi_2})(\Delta_{[,]}[\Gamma]), \alpha_1\otimes\alpha_2 \big\rangle. 
 \end{equation}
-For a graph $G$, we denote by $V(G)$ its vertex set and $E(G)$ its edge set. 
-The LHS above equals to\footnote{
+The RHS above equals to\footnote{
 A little more argument needed for this claim, but it is true.} 
 \begin{align*}
 \sum_{\Gamma'\le\Gamma}
@@ -888,7 +944,7 @@ Suppose $\omega$ is a closed $k$-form on $U$ such that $[\omega]$ lies in the im
 then there is a neighborhood $U''\subset U$ of $\partial M$ such that $\omega|_{U''}$ can be extended to a closed $k$-form on $M$. 
 \end{lmm}
 
-\begin{proof}[Proof (same as \textcolor{red}{(add ref)})]
+\begin{proof}[Proof (same as \cmt{9802062 below Lemma 1.2})]
 Let $\alpha$ be a closed $d$-form on $M\backslash{\partial M}$ such that the restriction of $[\alpha]$ to $U$ is $[\omega]$. 
 Then, there exists a $(k-1)$-form $\beta$ on $U$ such that $d\beta=\omega-\alpha|_{U}$. 
 We can find\footnote{For example, using a metric on $M$ and properly modify the distance function to $\partial M$.} open subsets $U',U''$ of $M$ such that $\partial M\subsetneq U''\subsetneq U'\subsetneq U$, and a smooth function $f:M\to[0,1]$ such that $f|_{U''}\equiv 0$, $f|_{M\backslash U'}\equiv1$. 

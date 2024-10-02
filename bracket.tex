@@ -86,10 +86,10 @@ In $\delta$ and all the operations on graphs below, whenever a graph not in $\cG
 \item Taking the homology of $\cG'$ with respect to $\delta$, denote by $H^*{\cG'}$. 
 
 \item Define the cobracket operation to be the linear map
-\begin{align*}
-\Delta_{[,]}: \cG'&\longrightarrow\cG'\otimes\cG'\\
+\begin{align}\label{graphcobracket_eqn}
+\Delta_{[,]}: \cG'&\longrightarrow\cG'\otimes\cG'\nonumber\\
 \Gamma&\longrightarrow \sum_{\Gamma'\le\Gamma}\big(\Gamma'\otimes\Gamma/\Gamma'+(-1)^{..}\Gamma/\Gamma'\otimes\Gamma'\big), 
-\end{align*}
+\end{align}
 where $\Gamma'$ ranges through all full subgraphs of $\Gamma$ that is connected, with no univalent vertex or simple loop.
 \item Check that $\Delta_{[,]}$ commutes with $\delta$ and $\delta\otimes\tn{id}\pm\tn{id}\otimes\delta$, so it descends to 
 $$\Delta_{[,]}: H^*{\cG'}\longrightarrow H^*(\cG'\otimes\cG')\approx H^*{\cG'}\otimes H^*{\cG'}.$$
@@ -798,7 +798,7 @@ The first term is 0 because $\wt{\omega}$ is closed.
 Because the singular chains $\sum_{j_1}\iota_1^{j_1}$, $\sum_{j_2}\iota_2^{j_2}$ are cycles, when summing over all $j_1$, the second term is 0; when summing over all $j_2$, the third term is 0. 
 So, 
 $$(\ref{integral_eqn})=\sum_{i,j_1,j_2}\Big(\int_{(\iota_1^{j_1},\iota_2^{j_2})^*\ov{S}_{\sblue}^i}\bigwedge_{e}\ff_e^*\wt{\omega}+\int_{(\iota_1^{j_1},\iota_2^{j_2})^*\ov{C}^*_{V(\Gamma_i)}}\bigwedge_{e}\ff_e^*{\wt\omega}\Big).$$
-Since $\sum_{i}\Gamma_i$ is a cocycle in graph cohomology, the first term is 0 just like in the proof of the well-definedness of Kontsevich's classes\footnote{
+Since $\sum_{i}\Gamma_i$ is a cocycle in graph cohomology, the first term is 0 just like in the proof of the well-definedness of Kontsevich's classes, see e.g. \cite[Appendix E]{WatanabeAddendum}\footnote{
 The argument goes as follows: a top-dimensional stratum $S$ of $\ov{S}_{\sblue}^i$ contains a screen with space label $\R^d$, consider 3 separate cases: \cmt{...}
 }, 
 so
@@ -814,71 +814,74 @@ so
 
 It remains to show that 
 \begin{equation}\label{stardecompose_eqn}
-(\ref{confstarintegral_eqn})=\big\langle (K_{\pi_1}\otimes K_{\pi_2})(\Delta_{[,]}[\Gamma]), \alpha_1\otimes\alpha_2 \big\rangle. 
+(\ref{confstarintegral_eqn})=\big\langle (K_{\pi_1}\otimes K_{\pi_2})(\Delta_{[,]}\big[\sum_{i}\Gamma_i\big]), \alpha_1\otimes\alpha_2 \big\rangle. 
 \end{equation}
-The RHS above equals to\footnote{
-A little more argument needed for this claim, but it is true.} 
+The right hand side above equals to\footnote{
+A little more argument needed for this claim, but it is true.\cmt{Say things like $K_\pi$ is induced from a chain map from the graph complex to the differential forms on $B$. Maybe cite \cite[Theorem 2.15(1)]{WatanabeAddendum}.}} 
 \begin{align*}
-\sum_{\Gamma'\le\Gamma}
-\Big(&\int_{\ov{C}_{V(\Gamma')}(\pi_1)}
-\bigwedge_{e\in E(\Gamma')}f_e^*\omega_1\Big)
+\big\langle (K_{\pi_1}\otimes K_{\pi_2})(\big[\sum_{i}&\sum_{\Gamma'_i\le\Gamma_i}(\Gamma'_i\otimes\Gamma_i/\Gamma'_i+(-1)^?\Gamma_i/\Gamma'_i\otimes\Gamma'_i)\big]), \alpha_1\otimes\alpha_2 \big\rangle=\\
+\sum_{i,j_1,j_2}\sum_{\Gamma'_i\le\Gamma_i}
+\bigg(\Big(&\int_{(\iota_1^{j_1})^*\ov{C}_{V(\Gamma'_i)}(\pi_1)}
+\bigwedge_{e\in E(\Gamma'_i)}\ff_e^*\omega_1\Big)
 \cdot
-\Big(\int_{\ov{C}_{V(\Gamma/\Gamma')}(\pi_2)}
-\bigwedge_{e\in E(\Gamma/\Gamma')}f_e^*\omega_2\Big)\\
-&\pm
-\Big(\int_{\ov{C}_{V(\Gamma/\Gamma')}(\pi_1)}
-\bigwedge_{e\in E(\Gamma/\Gamma')}f_e^*\omega_1\Big)
+\Big(\int_{(\iota_2^{j_2})^*\ov{C}_{V(\Gamma_i/\Gamma'_i)}(\pi_2)}
+\bigwedge_{e\in E(\Gamma_i/\Gamma'_i)}\ff_e^*\omega_2\Big)\\
+&+(-1)^?
+\Big(\int_{(\iota_1^{j_1})^*\ov{C}_{V(\Gamma_i/\Gamma'_i)}(\pi_1)}
+\bigwedge_{e\in E(\Gamma_i/\Gamma'_i)}\ff_e^*\omega_1\Big)
 \cdot
-\Big(\int_{\ov{C}_{V(\Gamma')}(\pi_2)}
-\bigwedge_{e\in E(\Gamma')}f_e^*\omega_2\Big).
+\Big(\int_{(\iota_2^{j_2})^*\ov{C}_{V(\Gamma'_i)}(\pi_2)}
+\bigwedge_{e\in E(\Gamma'_i)}\ff_e^*\omega_2\Big)\bigg).
 \end{align*}
-To prove (\ref{stardecompose_eqn}), it suffices to show that 
+To prove (\ref{stardecompose_eqn}), it suffices to show that, for all $i,j_1,j_2$, 
 \begin{equation}\label{yellow_eqn}
-\sum_{\Gamma'\le\Gamma}
-\Big(\int_{\ov{C}_{V(\Gamma')}(\pi_1)}
-\bigwedge_{e\in E(\Gamma')}f_e^*\omega_1\Big)
+\sum_{\Gamma'_i\le\Gamma_i}
+\Big(\int_{(\iota_1^{j_1})^*{C}_{V(\Gamma'_i)}(\pi_1)}
+\bigwedge_{e\in E(\Gamma'_i)}\ff_e^*\omega_1\Big)
 \cdot
-\Big(\int_{\ov{C}_{V(\Gamma/\Gamma')}(\pi_2)}
-\bigwedge_{e\in E(\Gamma/\Gamma')}f_e^*\omega_2\Big)=
-\int_{\tn{yellow part of }\ov{C}^*_{V(\Gamma)}}\bigwedge_{e\in E(\Gamma)}f_e^*{\omega_*}
+\Big(\int_{(\iota_2^{j_2})^*{C}_{V(\Gamma_i/\Gamma'_i)}(\pi_2)}
+\bigwedge_{e\in E(\Gamma_i/\Gamma'_i)}\ff_e^*\omega_2\Big)=
+\int_{(\iota_1^{j_1},\iota_2^{j_2})^*S_{\syellow}^i}\bigwedge_{e\in E(\Gamma_i)}\ff_e^*{\wt\omega}
 \end{equation}
 and 
 \begin{equation}\label{red_eqn}
-\sum_{\Gamma'\le\Gamma}
-\Big(\int_{\ov{C}_{V(\Gamma/\Gamma')}(\pi_1)}
-\bigwedge_{e\in E(\Gamma/\Gamma')}f_e^*\omega_1\Big)
+\sum_{\Gamma'_i\le\Gamma_i}
+\Big(\int_{(\iota_1^{j_1})^*{C}_{V(\Gamma_i/\Gamma'_i)}(\pi_1)}
+\bigwedge_{e\in E(\Gamma_i/\Gamma'_i)}\ff_e^*\omega_1\Big)
 \cdot
-\Big(\int_{\ov{C}_{V(\Gamma')}(\pi_2)}
-\bigwedge_{e\in E(\Gamma')}f_e^*\omega_2\Big)=
-\int_{\tn{red part of }\ov{C}^*_{V(\Gamma)}}\bigwedge_{e\in E(\Gamma)}f_e^*{\omega_*};
+\Big(\int_{(\iota_2^{j_2})^*{C}_{V(\Gamma'_i)}(\pi_2)}
+\bigwedge_{e\in E(\Gamma'_i)}\ff_e^*\omega_2\Big)=
+\int_{(\iota_1^{j_1},\iota_2^{j_2})^*S_{\sred}^i}\bigwedge_{e\in E(\Gamma_i)}\ff_e^*{\wt\omega}. 
 \end{equation}
-here the ``red'' and ``yellow'' refers to the $\wt{C}_n$ picture in Section \ref{conftilde_sec}. 
 Below we only prove (\ref{yellow_eqn}) since (\ref{red_eqn}) is completely similar. 
 
-The yellow part of $\ov{C}^*_{V(\Gamma)}$ is simply
-$$\sum_{V_1,V_2:V_1\sqcup V_2=V(\Gamma)}
-\ov{C}_{V_1}(\pi_1)\times\ov{C}_{V_2\sqcup\{\star\}}(\pi_2),
+Since
+$$S_{\syellow}^i=
+\sum_{V_1,V_2:V_1\sqcup V_2=V(\Gamma_i)}
+{C}_{V_1}(\pi_1)\times{C}_{V_2\sqcup\{\star\}}(\pi_2)
 $$
-where $\star$ records the position of the node on $\pi_2$.
-Therefore, the RHS of (\ref{yellow_eqn}) is
-$$\sum_{V_1,V_2:V_1\sqcup V_2=V(\Gamma)}
-\int_{\ov{C}_{V_2\sqcup\{\star\}}(\pi_2)}\int_{\ov{C}_{V_1}(\pi_1)}
-\bigwedge_{\begin{subarray}{c}e\in E(\Gamma)\\\tn{both endpoints of }e\tn{ are in }V_1\end{subarray}}f_e^*{\omega_*}\wedge
-\bigwedge_{\begin{subarray}{c}e\in E(\Gamma)\\ \exists\tn{ endpoint of }e\tn{ in }V_2\end{subarray}}f_e^*{\omega_*}. 
-$$ 
-For $V_1\subset V(\Gamma)$, we denote by $\Gamma'(V_1)$ the subgraph of $\Gamma$ spanned by vertices in $V_1$. Then, by the way $\omega_*$ is constructed, and by Fubini's Theorem, 
-the above equals to 
-$$\sum_{V_1,V_2:V_1\sqcup V_2=V(\Gamma)}
-\Big(\int_{\ov{C}_{V_1}(\pi_1)}
+(where $\star$ records the position of the node on $\pi_2$), 
+and the bundle map $S_{\syellow}^i\to B_1\times B_2\to B_1$  (resp. $\to B_2$) is by projecting first to the $C_{V_1(\pi_1)}$ (resp. $C_{V_2\sqcup\{\star\}}(\pi_2)$) factor and then go along the bundle map $C_{V_1(\pi_1)}\to B_1$ (resp. $C_{V_2\sqcup\{\star\}}(\pi_2)\to B_2$), 
+$$(\iota_1^{j_1},\iota_2^{j_2})^*S_{\syellow}^i=\sum_{V_1,V_2:V_1\sqcup V_2=V(\Gamma_i)}(\iota_1^{j_1})^*C_{V_1}(\pi_1)\times(\iota_2^{j_2})^*C_{V_2\sqcup\{\star\}}(\pi_2).$$
+So, by the construction of $\wt\omega$ on $S_{\syellow}$ and by Fubini's Theorem, the right hand side of (\ref{yellow_eqn}) is
+\begin{align*}
+\sum_{V_1,V_2:V_1\sqcup V_2=V(\Gamma_i)}
+\int_{(\iota_2^{j_2})^*{C}_{V_2\sqcup\{\star\}}(\pi_2)}\int_{(\iota_1^{j_1})^*{C}_{V_1}(\pi_1)}
+\bigwedge_{\begin{subarray}{c}e\in E(\Gamma_i)\\\tn{both endpoints of }e\tn{ are in }V_1\end{subarray}}\ff_e^*{\omega_1}\wedge
+\bigwedge_{\begin{subarray}{c}e\in E(\Gamma)\\ \exists\tn{ endpoint of }e\tn{ in }V_2\end{subarray}}\ff_e^*{\omega_2}\\
+=\sum_{V_1,V_2:V_1\sqcup V_2=V(\Gamma_i)}
+\Big(\int_{(\iota_1^{j_1})^*{C}_{V_1}(\pi_1)}
 \bigwedge_{e\in E(\Gamma'(V_1))} 
-f_e^*{\omega_1}\Big)
+\ff_e^*{\omega_1}\Big)
 \cdot
-\Big(\int_{\ov{C}_{V_2\sqcup\{\star\}}(\pi_2)}
+\Big(\int_{(\iota_2^{j_2})^*{C}_{V_2\sqcup\{\star\}}(\pi_2)}
 \bigwedge_{e\in E(\Gamma/\Gamma'(V_1))}
-f_e^*{\omega_2}\Big). 
-$$ 
+\ff_e^*{\omega_2}\Big), 
+\end{align*}
+where, for $V_1\subset V(\Gamma_i)$, $\Gamma'(V_1)$ denotes the subgraph of $\Gamma_i$ spanned by vertices in $V_1$. 
 This proves (\ref{yellow_eqn}). 
 
+\subsection*{Case II: $\alpha_0=[{pt}]$}
 
 \begin{appendices}
 \section{Extending differential forms on a manifold with corners from boundary to interior}

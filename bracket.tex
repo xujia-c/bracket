@@ -734,7 +734,7 @@ B_{t_0}\rar[hook]\drar["\pi_{B_I}|_{B_{t_0}}"'] & B_I\dar["\pi_{B_I}"] \\
 \]
 where $\pi_{[]}^A$, $\pi_{B_I}$ are submersions but not $\tilde\pi^A$. 
 
-\begin{lmm}
+\begin{lmm}\label{stratasubmersion_lmm}
 Let $A'\subset A$ be finite sets and $\ff_{A',A}:\wt{C}_{A}\to\wt{C}_{A'}$ the forgetful map forgetting all marked points not in $A'$. 
 Then, for every (open) stratum $S$ of $\wt{C}_{A}$, $\ff_{A',A}(S)$ is again an open stratum of $\wt{C}_{A'}$ and 
 $$\ff_{A',A}|_S:S\longrightarrow \ff_{A',A}(S)$$
@@ -747,9 +747,10 @@ In particular, when $A'=\emptyset$, this holds with $\wt{C}_{A'}=B_I$ and $\ff_{
 
 
 Suppose $\sum_{i=1}^{m}\Gamma_i$ is a cocycle in graph cohomology. 
+For convenience, in this section we use $\ov{S}_{\sgray}^i$ to denote the $\ov{S}_{\sgray}$ in $\wt{C}_{V(\Gamma_i)}$, and same for the other colors (red, orange, yellow, blue) instead of gray.
 For every edge $e$ of some $\Gamma_i$, we have the forgetful map 
 $$\ff_e:\wt{C}_{V(\Gamma_i)}\longrightarrow\wt{C}_2.$$
-And, when restricted to $\ov{S}_{\sgray}\subset\wt{C}_{V(\Gamma_i)}$ (resp. $\ov{C}_{V(\Gamma_i)}^*\subset\wt{C}_{V(\Gamma_i)}$), it is the forgetful map
+And, when restricted to $\ov{S}_{\sgray}^i\subset\wt{C}_{V(\Gamma_i)}$ (resp. $\ov{C}_{V(\Gamma_i)}^*\subset\wt{C}_{V(\Gamma_i)}$), it is the forgetful map
 $$\ff_e:\ov{C}_{V(\Gamma_i)}([\pi_1,\pi_2])\longrightarrow\ov{C}_2([\pi_1,\pi_2]) \qquad (\tn{resp. } \ff_e:\ov{C}^*_{V(\Gamma_i)}\longrightarrow\ov{C}^*_2).$$
 Now we have the form $\bigwedge_{e\in E(\Gamma_i)}\ff_e^*\wt{\omega}$ on $\wt{C}_{V(\Gamma_i)}$. 
 Recall that by the definition of Kontsevich's characteristic classes, 
@@ -760,7 +761,7 @@ $$
 To determine $K_{[\pi_1,\pi_2]}\big(\big[\sum_{i=1}^m\Gamma_i\big]\big)$, it suffices to determine the intersection pairing 
 $$\big\langle K_{[\pi_1,\pi_2]}\big(\big[\sum_{i=1}^m\Gamma_i\big]\big), \alpha_0\otimes\alpha_1\otimes\alpha_2\big\rangle$$
 for all homology classes $\alpha_0\in H_*(S^d)$, $\alpha_1\in H_*(B_1)$ and $\alpha_2\in H_*(B_2)$. 
-Below, we discuss the two cases $\alpha_0=[\tn{point}]$ and $\alpha_0=[S^d]$ separately. 
+Below, we discuss the two cases $\alpha_0=[pt]$ (the class of a point) and $\alpha_0=[S^d]$ separately. 
 
 \subsection*{Case I: $\alpha_0=[S^d]$}
 
@@ -770,9 +771,7 @@ where $\iota^{j_a}_a$ are smooth maps from the standard $k_a$-dimensional simple
 Since for all finite set $A$,
 $\pi_{B_I}\circ\tilde{\pi}^A:\wt{C}_A\to B_1\times B_2$
 and its restriction to every stratum is a fiber bundle, 
-we can form the pullback bundles $(\iota_1^{j_1},\iota_2^{j_2})^*\wt{C}_A$, $(\iota_1^{j_1},\iota_2^{j_2})^*\ov{C}_A([\pi_1,\pi_2])$ ,$(\iota_1^{j_1},\iota_2^{j_2})^*\ov{C}^*_A$ over $\Delta^{k_1}\times\Delta^{k_2}$. 
-
-For convenience, in this section we use $\ov{S}_{\sgray}^i$ to denote the $\ov{S}_{\sgray}$ in $\wt{C}_{V(\Gamma_i)}$, and same for the other colors (red, orange, yellow, blue) instead of gray. 
+we can form the pullback bundles $(\iota_1^{j_1},\iota_2^{j_2})^*\wt{C}_A$, $(\iota_1^{j_1},\iota_2^{j_2})^*\ov{C}_A([\pi_1,\pi_2])$ ,$(\iota_1^{j_1},\iota_2^{j_2})^*\ov{C}^*_A$ over $\Delta^{k_1}\times\Delta^{k_2}$.  
 
 We then have 
 \begin{equation}
@@ -881,7 +880,77 @@ So, by the construction of $\wt\omega$ on $S_{\syellow}$ and by Fubini's Theorem
 where, for $V_1\subset V(\Gamma_i)$, $\Gamma'(V_1)$ denotes the subgraph of $\Gamma_i$ spanned by vertices in $V_1$. 
 This proves (\ref{yellow_eqn}). 
 
-\subsection*{Case II: $\alpha_0=[{pt}]$}
+\subsection*{Case II: $\alpha_0=[pt]$}
+
+For simplicity of exposition, we assume for $a=1,2$, $\alpha_a$ can be represented by a smooth submanifold $B'_a\subset B_a$. 
+This assumption is purely for the purpose of simplifying the notation: all the arguments below can be easily adapted to the case when $B'_a$ is only a piecewise smooth singular chain, similar to Case I. 
+(The readers familiar with the theory of pseudocycles should take $B'_a$ to be a pseudocycle: the arguments below works verbatim and no assumption needs to be made.)
+
+We consider the pullback of everything to $B'_1\times B'_2$: let $B'$, $B'_I$, $\wt{C}'_A$, $\ov{C}'_A([\pi_1,\pi_2])$, $(\ov{S}_{\sgray}^i)'$, $(\ov{S}_{\sblue}^i)'$, $(\ov{S}_{\sred}^i)'$, $(\ov{S}_{\syellow}^i)'$, $(\ov{S}_{\sorange}^i)'$ be the pullback of $B$, $B'$, $\wt{C}_A$, $\ov{C}_A([\pi_1,\pi_2])$, $\ov{S}_{\sgray}^i$, $\ov{S}_{\sblue}^i$, $\ov{S}_{\sred}^i$, $\ov{S}_{\syellow}^i$, $\ov{S}_{\sorange}^i$, respectively. 
+
+Recall that $B_I$ is constructed by gluing together 3 pieces \cmt{cite Section 2.4 of conftilde}:
+$$\mr E_1(3) \times B_2\times[0,\rho),\quad S^{d-1}\times L\times B_1\times B_2,\quad B_1\times \mr E_2(3) \times[0,\rho), $$
+where $L\subset\R^2$ is the (closure of the) blue region below:
+%where $L$ is the closed region enclosed by 
+%$$\{x=0,0\le y\le 1/2\},\quad \{y=0,0\le x\le 1/2\},\quad \{...\}$$ 
+
+\begin{tikzpicture}[scale=3]
+\draw[step=0.2,help lines] (0,0) grid (0.6,0.6);
+\draw[<->] (0,0.7) -- (0,0) --(0.7,0); 
+\node at (0.75,0) {\tiny x}; 
+\node at (0,0.75) {\tiny y}; 
+\node [left] at (0,1/2) {\tiny $\frac{1}{2}$}; 
+\node [left] at (0,1/3) {\tiny $\frac{1}{3}$}; 
+\node [below] at (1/2,0) {\tiny $\frac{1}{2}$}; 
+\node [below] at (1/3,0) {\tiny $\frac{1}{3}$}; 
+
+\coordinate (o) at (0,0); 
+\coordinate (a) at (0.3,1/2); 
+\coordinate (e) at (1/2,0.3); 
+\coordinate (c) at (0.15,0.15); 
+\coordinate (b) at ($(a)!1/3!(o)$);
+\coordinate (d) at ($(e)!1/3!(o)$); 
+\draw[help lines] (b) -- (0,1/3); 
+\draw[help lines] (d) -- (1/3,0); 
+
+\draw[cyan, fill=cyan, fill opacity=0.4] (e) -- (0.5,0) -- (o) -- coordinate[pos=0.3] (q) (0,0.5) -- (a) to (b) to [in=135, out=-119] coordinate[pos=0.8] (p) (c) to [in=209, out=-45] (d) to (e); 
+
+\draw[green!60!black] (a) to (b) to [in=135, out=-119] coordinate[pos=0.8] (p) (c) to [in=209, out=-45] (d) to (e);
+\node[green!60!black] at (0.3,0.4) {\tiny $\xi$}; 
+
+\fill[purple] (p) circle [radius=0.01]; 
+\node[purple] at ($(p)+(0.05,0.03)$) {\tiny $p$}; 
+\fill[purple] (q) circle [radius=0.01]; 
+\node[purple] at ($(q)+(-0.05,0)$) {\tiny $q$}; 
+\draw[purple] plot [smooth] coordinates {(p) (q)}; 
+\node[purple] at (0.07,0.12) {\tiny $l$};
+\end{tikzpicture}
+
+We define $\xi$ to be the curvy stratum of $\partial L$, shown as green in the picture. 
+Then, $S^{d-1}\times\xi\times B_1\times B_2$ is part of $B=B_{t_0}\subset B_I$, the base of $[\pi_1,\pi_2]$. 
+
+Let $v\in S^{d-1}$ be a generic point. 
+Let $p$ be a generic point on $\xi$ and $q$ be a generic point on $\{x=0,0<y<1/2\}$. Let $l$ be a generic path going from $P$ to $q$, transverse to $\partial L$ ($l$ is shown in purple in the picture above). 
+Denote 
+\begin{align*}
+M_{p}&:=v\times p\times B'_1\times B'_2\subset S^{d-1}\times \xi\times B_1\times B_2&\subset B'=B'_{t_0},\\
+M_{q}&:=v\times q\times B'_1\times B'_2\subset S^{d-1}\times \{x=0,0<y<1/2\}\times B_1\times B_2&\subset B'_0,\\
+M_{l}&:=v\times l\times B'_1\times B'_2\subset S^{d-1}\times L\times B_1\times B_2&\subset B'_I. 
+\end{align*}
+Then, $M_p$ is a section of the bundle $B'\to B'_1\times B'_2$ and thus a representative of $[pt]\otimes\alpha_1\otimes\alpha_2$. 
+So,  
+\begin{equation}
+\label{integral2_eqn}
+\big\langle K_{[\pi_1,\pi_2]}([\sum_{i=1}^m\Gamma_i]), [pt]\otimes\alpha_1\otimes\alpha_2 \big\rangle=
+\sum_{i}\int_{\ov{C}'_{V(\Gamma_i)}([\pi_1,\pi_2])|_{M_p}}\bigwedge_{e}\ff_e^*{\omega}=
+\sum_{i}\int_{(\ov{S}_{\sgray}^i)'|_{M_p}}\bigwedge_{e}\ff_e^*\wt{\omega}.
+\end{equation}
+
+By Lemma \ref{stratasubmersion_lmm}, for every stratum $S$ of $\wt{C}'_{V(\Gamma_i)}$, the differential of  $S\to B'_I$ is surjective at every point on $M_l\backslash M_q$, and on $M_q$ the image of this differential covers $T_{S^{d-1}}\times\{x=0,0<y<1/2\}\times B'_1\times B'_2$. So, since the differential of $l$ at $q$ covers the normal direction of $\{x=0,0<y<1/2\}\subset L$, the map $S\to B'_I$ is transverse to $M_l$. 
+We denote by $S|_{M_l}$ the fiber product, viewed as a subspace of $S\subset \wt{C}'_{V(\Gamma_i)}$. 
+It is a manifold with corners, and 
+$$\partial\wt{C}'_{V(\Gamma_i)}=$$
+
 
 \begin{appendices}
 \section{Extending differential forms on a manifold with corners from boundary to interior}

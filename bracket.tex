@@ -880,7 +880,7 @@ So, by the construction of $\wt\omega$ on $S_{\syellow}$ and by Fubini's Theorem
 where, for $V_1\subset V(\Gamma_i)$, $\Gamma'(V_1)$ denotes the subgraph of $\Gamma_i$ spanned by vertices in $V_1$. 
 This proves (\ref{yellow_eqn}). 
 
-\subsection*{Case II: $\alpha_0=[pt]$\cmt{not great; need to modify!}}
+\subsection*{Case II: $\alpha_0=[pt]$\footnote{\cmt{The exposition is not so great; may need further polishing.}}}
 
 For simplicity of exposition, we assume for $a=1,2$, $\alpha_a$ can be represented by a smooth submanifold $B'_a\subset B_a$. 
 This assumption is purely for the purpose of simplifying the notation: all the arguments below can be easily adapted to the case when $B'_a$ is only a piecewise smooth singular chain, similar to Case I. 
@@ -953,12 +953,12 @@ So,
 \end{equation}
 
 By Lemma \ref{stratasubmersion_lmm}, for every stratum $S$ of $\wt{C}'_{V(\Gamma_i)}$, the differential of  $S\to B'_I$ is surjective at every point on $M_{l_1}\backslash M_q$, and on $M_q$ the image of this differential covers $T_{S^{d-1}}\times\xi_0\times B'_1\times B'_2$. So, since the differential of $l_1$ at $q$ covers the normal direction of $\xi_0\subset L$, the map $S\to B'_I$ is transverse to $M_{l_1}$. 
-We denote by $S|_{M_{l_1}}$ the fiber product, viewed as a subspace of $S\subset \wt{C}'_{V(\Gamma_i)}$. 
-It is a manifold with corners, and 
+%We denote by $S|_{M_{l_1}}$ the fiber product, viewed as a subspace of $S\subset \wt{C}'_{V(\Gamma_i)}$. 
+Therefore, $\wt{C}'_{V(\Gamma_i)}|_{M_{l_1}}$ is a manifold with corners, and 
 \begin{align*}
 \partial(\wt{C}'_{V(\Gamma_i)}|_{M_{l_1}})&=
-(\partial\wt{C}'_{V(\Gamma_i)})|_{\mr{M}_{l_1}}+ \wt{C}'_{V(\Gamma_i)}|_{M_{q}}-\wt{C}'_{V(\Gamma_i)}|_{M_{p}}\\
-&=(\ov{S}_{\sblue}^i)'|_{\mr{M}_{l_1}}+(\ov{S}_{\syellow}^i)'_{M_q}-(\ov{S}_{\sgray}^i)'|_{M_p}.
+(\partial\wt{C}'_{V(\Gamma_i)})|_{{M}_{l_1}}+ \wt{C}'_{V(\Gamma_i)}|_{M_{q}}-\wt{C}'_{V(\Gamma_i)}|_{M_{p}}\\
+&=(\ov{S}_{\sblue}^i)'|_{{M}_{l_1}}+(\ov{S}_{\syellow}^i)'_{M_q}-(\ov{S}_{\sgray}^i)'|_{M_p}.
 \end{align*}
 By Stocks' Formula and that $\wt\omega$ is closed we have
 \begin{equation}\label{stocks3_eqn}
@@ -968,34 +968,39 @@ where, just as in Case I, the $\ov{S}_{\sblue}$ term vanishes by the same argume
 
 Let $(\ov{S}_{\syellow}^i)'|_{l_0}$ (resp. $(\ov{S}_{\syellow}^i)'|_{l_0\backslash q}$) be the preimage of $S^{d-1}\times l_0\times B'_1\times B'_2$ (resp. $S^{d-1}\times (l_0\backslash q)\times B'_1\times B'_2$) in $(\ov{S}_{\syellow}^i)'$. 
 Then, $(\ov{S}_{\syellow}^i)'|_{l_0\backslash q}$ is an open subset of $(\ov{S}_{\syellow}^i)'$ and, since every stratum of $(\ov{S}_{\syellow}^i)'$ is transverse to $q$, $(\ov{S}_{\syellow}^i)'|_{l_0}$ is a manifold with corners. 
-The map $(\ov{S}_{\syellow}^i)'|_{l_0}\to S^{d-1}$ is a submersion, so the preimage of $v$ under this map, $(\ov{S}_{\syellow}^i)'|_{M_{l_0}}$, is again a manifold with corners, and we have 
-$$\partial (\ov{S}_{\syellow}^i)'|_{M_{l_0}}=\big((\ov{S}_{\syellow}^i)'\cap(\ov{S}_{\sblue}^i)'\big)|_{\mr{M}_{l_0}}+(\ov{S}_{\syellow}^i)'|_{M_q}-(\ov{S}_{\syellow}^i)'|_{M_{(0,0)}}.$$
-So, by Stocks' Formula and the vanishing of the integral over $\ov{S}_{\sblue}$ again, 
+The boundary strata of $(\ov{S}_{\syellow}^i)'|_{l_0}$ are of two kinds:
+the strata of $(\ov{S}_{\syellow}^i)'|_{l_0\backslash q}$ and the strata of $(\ov{S}_{\syellow}^i)'$ restricted to $S^{d-1}\times q\times B'_1\times B'_2$. 
+Moreover, the map $(\ov{S}_{\syellow}^i)'|_{l_0}\to S^{d-1}$ is a submersion when restricted to on every stratum, so the preimage of $v$ under this map, $(\ov{S}_{\syellow}^i)'|_{M_{l_0}}$, is again a manifold with corners, and we have 
+$$\partial (\ov{S}_{\syellow}^i)'|_{M_{l_0}}=\big(\partial(\ov{S}_{\syellow}^i)'\big)|_{{M}_{l_0\backslash({M}_p,M_q)}}+(\ov{S}_{\syellow}^i)'|_{M_q}-(\ov{S}_{\syellow}^i)'|_{M_{(0,0)}}.$$
+The first term consisting of strata with at least one screen with space label $\R^d$ and the points on that screen is not a priori constrainted; so, again by the same argument as showing well-definedness of Kontsevish's classes, these strata do not contribute to the integrals below. 
+By Stocks' Formula, 
 \begin{equation}\label{stocks4_eqn}
-(\ref{stocks3_eqn})=\sum_i\int_{(\ov{S}_{\syellow}^i)'|_{M_{(0,0)}}}\bigwedge_e\ff_e^*\wt\omega=\sum_i\int_{(\ov{S}_{\sorange}^i)'|_v}\bigwedge_e\ff_e^*\wt\omega=\sum_i\int_{({S}_{\sorange}^i)'|_v}\bigwedge_e\ff_e^*\wt\omega.
+(\ref{stocks3_eqn})=\sum_i\int_{(\ov{S}_{\syellow}^i)'|_{M_{(0,0)}}}\bigwedge_e\ff_e^*\wt\omega=
+\sum_i\int_{(\ov{S}_{\syellow}^i)'|_{M_q}}\bigwedge_e\ff_e^*\wt\omega=\sum_i\int_{({S}_{\sorange}^i)'|_v}\bigwedge_e\ff_e^*\wt\omega.
 \end{equation}
 Recall 
 $$S_{\sorange}^i=
 \sum_{V_1,V_2,V_3:V_1\sqcup V_2\sqcup V_3=V(\Gamma_i)}
 {C}_{V_1}(\pi_1)\times{C}_{V_2}(\pi_2)\times C_{V_3\sqcup\{\star_1,\star_2\}}(\R^d)$$
-and restricting to $v$ translates to restricting the $C_{V_3\sqcup\{\star_1,\star_2\}}(\R^d)$ term to the case $\frac{\star_1-\star_2}{|\star_1-\star_2|}=v$; 
-we can view $\star_1=0, \star_2=v$ to be two fixed points in $\R^d$ and define 
-$$C'_{V_3}(\R^d)=\{(x_v\in\R^d)_{v\in V_3}|\,\forall v\in V_3,x_v\neq\star_1,x_v\neq \star_2;\forall v,w\in V_3,x_v\neq x_w\}.$$
-For $V_1,V_2\subset V(\Gamma_i)$, define $\Gamma'_i(V_1),\Gamma'_i(V_2)$ to be the subgraph pf $\Gamma_i$ spanned by the vertices in $V_1$ and $V_2$, respectively.
+and restricting to $v$ means restricting the $C_{V_3\sqcup\{\star_1,\star_2\}}(\R^d)$ term to the case $\frac{\star_1-\star_2}{|\star_1-\star_2|}=v$; 
+we can thus view $\star_1=0, \star_2=v$ (here we implicitly identify $S^{d-1}$ as the unit sphere in $\R^d$) to be two fixed points in $\R^d$ and define 
+$$C^{\star}_{V_3}(\R^d)=\{(x_v\in\R^d)_{v\in V_3}|\,\forall v\in V_3,x_v\neq0,x_v\neq v;\forall v,w\in V_3,x_v\neq x_w\}.$$
+For $V_1,V_2\subset V(\Gamma_i)$, define $\Gamma^{\tn{sub}}_i(V_1),\Gamma^{\tn{sub}}_i(V_2)$ to be the subgraph pf $\Gamma_i$ spanned by the vertices in $V_1$ and $V_2$, respectively.
 Define
-$$\Gamma_i/(V_1,V_2):=(\Gamma_i/\Gamma'_i(V_1))/\Gamma'_i(V_2)$$
-the quotient graph by contracting $\Gamma'_i(V_1)$ to a new vertex $\star_1$ and contracting $\Gamma'_i(V_2)$ to a new vertex $\star_2$. 
-For each edge $e\in E(\Gamma_i/(V_1,V_2))$, we still have the forgetful map $\ff_e:C'_{V_3}(\R^d)\to S^{d-1}$. 
+$$\Gamma_i/(V_1,V_2):=(\Gamma_i/\Gamma^{\tn{sub}}_i(V_1))/\Gamma^{\tn{sub}}_i(V_2)$$
+the quotient graph by contracting $\Gamma^{\tn{sub}}_i(V_1)$ to a new vertex $\star_1$ and contracting $\Gamma^{\tn{sub}}_i(V_2)$ to a new vertex $\star_2$. 
+For each edge $e\in E(\Gamma_i/(V_1,V_2))$, we still have the forgetful map $\ff_e:C^\star_{V_3}(\R^d)\to S^{d-1}$. 
 Then, by the way $\wt\omega$ is constructed, 
 \begin{align}\label{stocks5_eqn}
 \int_{({S}_{\sorange}^i)'|_v}\bigwedge_e\ff_e^*\wt\omega=
 \sum_{V_1,V_2,V_3:V_1\sqcup V_2\sqcup V_3=V(\Gamma_i)}
-\bigg(\int_{C'_{V_1}(\pi_1)}\bigwedge_{e\in E(\Gamma'_i(V_1))}\ff_e^*\omega_1\bigg)\cdot \nonumber\\
-\bigg(\int_{C'_{V_2}(\pi_2)}\bigwedge_{e\in E(\Gamma'_i(V_2))}\ff_e^*\omega_2\bigg)
+\bigg(\int_{C'_{V_1}(\pi_1)}\bigwedge_{e\in E(\Gamma^{\tn{sub}}_i(V_1))}\ff_e^*\omega_1\bigg)\cdot \nonumber\\
+\bigg(\int_{C'_{V_2}(\pi_2)}\bigwedge_{e\in E(\Gamma^{\tn{sub}}_i(V_2))}\ff_e^*\omega_2\bigg)
 \cdot
-\bigg(\int_{C'_{V_3}(\R^d)}\bigwedge_{e\in E(\Gamma_i/(V_1,V_2))}\ff_e^*\omega_0\bigg)
+\bigg(\int_{C^\star_{V_3}(\R^d)}\bigwedge_{e\in E(\Gamma_i/(V_1,V_2))}\ff_e^*\omega_0\bigg)
 \end{align}
-We claim that if $\Gamma_i/(V_1,V_2)$ is not the empty graph, then the term $\int_{C'_{V_3}(\R^d)}\bigwedge_{e\in E(C'_{V_3}(\R^d))}\ff_e^*\omega_0$ is always 0: this is again the same argument as in showing the well-definedness of Kontsevich's classes: if $\Gamma_i/(V_1,V_2)$ has a univalent vertex, then there is not enough constraints to determine the position of this vertex; if the $\Gamma_i/(V_1,V_2)$ has a bivalent vertex, then there is a $\Z^2$ symmetry making the relevant terms canceling out; if all the vertices of $\Gamma_i/(V_1,V_2)$ are at least trivalent, then the degree cannot match -- there are too many constraint in the problem than freedoms. 
+We claim that if $\Gamma_i/(V_1,V_2)$ is not the empty graph, then the term $\int_{C^\star_{V_3}(\R^d)}\bigwedge_{e\in E(E(\Gamma_i\backslash(V_1,V_2)))}\ff_e^*\omega_0$ is always 0:
+this is again the same argument as in showing the well-definedness of Kontsevich's classes: if $\Gamma_i/(V_1,V_2)$ has a univalent vertex, then there is not enough constraints to determine the position of this vertex; if the $\Gamma_i/(V_1,V_2)$ has a bivalent vertex, then there is a $\Z/2\Z$ symmetry making the relevant terms canceling out; if all the vertices of $\Gamma_i/(V_1,V_2)$ are at least trivalent, then the degree cannot match -- there are too many constraint in the problem than freedoms. 
 
 Therefore, the only contributions to (\ref{stocks5_eqn}) comes from terms when $\Gamma_i/(V_1,V_2)$ is the empty graph. Since $\Gamma_i$ is connected, this only happens if $V_1=V(\Gamma_i)$ or $V_2=V(\Gamma_i)$. Therefore, 
 $$(\ref{stocks5_eqn})=

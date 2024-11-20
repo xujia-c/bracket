@@ -252,8 +252,9 @@ where $\pr^1_{B_1}$ is by projecting to the first factor and then mapping by $\p
 It has a canonical section 
 \begin{align*}
 s_1: E_1(3)^\circ\times B_2\times (0,\rho)\longrightarrow (\pr^1_{B_1})^*E_1\\
-(p,b_2,t)\longrightarrow f^{-1}_1(p).
+(p,b_2,t)\longrightarrow f^{-1}_1(p);
 \end{align*}
+here, although $f_1$ itself is not a diffeomorphism, its restriction to each fiber is, and the ``$f_1^{-1}$'' here means the inverse of the restriction of $f_1$ to the fiber over $(p,b_2,t)$. 
 For a function 
 $$\lambda:E_1(3)^\circ\times B_2\times (0,\rho)\longrightarrow(0,2\rho_0),$$
 let 
@@ -521,8 +522,8 @@ we want the radius of $(\hat{U}'_i)|_p$ to stay constant with respect to $\hat\t
 \item Over $E_i(3)-E_i(2)$, we gradually increases the shifting from 0 (the first case above) to shifting by $\frac{1}{2}p$ (the second case above). 
 \end{itemize}
 
-%Once $\hat\tau'_i$ is defined, we denote 
-%$$\pi^*_iE_i(N)=\pi_i^*E_i-\Big((\hat\tau'_i)^{-1}\big((E_i-\sigma_i(B_i))\times\R^d\backslash\D^d(N)\big)\Big).$$
+Once $\hat\tau'_i$ is defined, we denote 
+$$\hat{E}_i(N)=\pi_i^*E_i-\Big((\hat\tau'_i)^{-1}\big((E_i-\sigma_i(B_i))\times\R^d\backslash\D^d(N)\big)\Big).$$
 
 
 \cmt{The rest of Section \ref{tauEI_subsec} can be skipped when first reading.}
@@ -578,7 +579,7 @@ The definition in Section \ref{trivEI1_subsubsec} ensures that the $\tau_\rI$ de
 For a finite set $S$, denote by $|S|$ the number of elements in $S$. 
 
 Let $A$ be a finite set. 
-In this section we describe the Strata of $\wt{C}_A$. 
+In this section we describe the strata of $\wt{C}_A$. 
 
 \subsection{The combinatorics}
 \begin{dfn}An {\it $A$-labeled tree} consists of
@@ -612,6 +613,10 @@ $\pi_\rI$ is associated to exactly one vertex, and no vertex is associated to $\
 \end{itemize}
 \end{dfn}
 
+\begin{dfn}
+For notational convenience, define $\ov{cld}(v)=cld(v)\sqcup lp(v)$. 
+\end{dfn}
+
 \begin{minipage}{.6\textwidth}
 \includegraphics[scale=0.2]{tree_fig}
 \end{minipage}
@@ -636,6 +641,7 @@ Then, for $X,Y\in \{\R^d,\pi_1,\pi_2,\pi_\rI\}$, define $X+Y=\tn{lsset}^{-1}(\tn
 
 \begin{dfn}
 For $T\in\cT(A)$, let $T/e\in\cT(A)$ be the tree obtained by contracting $e$---merging the two vertices connected to $e$ into a single vertex, taking a union of their point labels and sum (in the sense above) of their space labels. 
+Similarly, if $I\subset E(T)$, denote by $T/I\in\cT(A)$ the tree obtained by contracting all edges in $I$. 
 
 %use the following rule to determine the new vertex's space label from old vertices' space labels: 
 %
@@ -657,8 +663,8 @@ which maps every edge to itself.
 
 Let $T$ be an $A$-labeled tree. 
 For $v\in V(T)$, define  
-$$\tn{Space}(v)=C_{cld(v)\sqcup lp(v)}(ls(v));$$
-i.e., the (uncompactified) configuration space of $(cld(v)\sqcup lp(v))$-labeled points in $ls(v)$. 
+$$\tn{Space}(v)=C_{\ov{cld}(v)}(ls(v));$$
+i.e., the (uncompactified) configuration space of $\ov{cld}(v)$-labeled points in $ls(v)$. 
 For example, for the vertex $v$ in the picture above, $$ls(v)=\R^d, lp(v)=\{11,12\}, cld(v)=\{w,w',w''\},$$
 so $\tn{Space}(v)=C_{\{11,12,w,w',w''\}}(\R^d)$. 
 
@@ -683,7 +689,7 @@ $$ls(> v)=\{x\in\{\pi_1,\pi_2\}\big|\, \exists v'\in V(T), v'>v, \tn{lsset}(x)\s
 %ls(v')=x\tn{ or }\pi_\rI\}.$$
 We then define a ``forgetful map'' 
 \begin{align*}
-f_v:lp(\ge v)\sqcup ls(>v)&\longrightarrow cld(v)\sqcup lp(v)\\
+f_v:lp(\ge v)\sqcup ls(>v)&\longrightarrow \ov{cld}(v)\\
 f_v(x)=&\begin{cases}x, \tn{ if }x\in lp(v);\\ w\in cld(v) \tn{ such that }\exists v'\ge w, x\in lp(v') \tn{ or }\tn{lsset}(x)\subset\tn{lsset}(ls(v')), \tn{ otherwise}.\end{cases}
 \end{align*}
 For example, if $T$ is as in the example in Section \ref{stratum2_sec}, then 
@@ -702,7 +708,7 @@ $$f_r(2)=f_r(4)=f_r(3)=f_r(\pi_1)=\tn{the vertex carrying }\pi_1 \tn{ and } 3\in
 Suppose $x=(x_v)_{v\in V(T)}\in S_T=\prod_{v\in V(T)}\tn{Space}(v)$ and $v\in V(T)$ is such that $ls(v)=\R^d$. 
 
 \begin{dfn}
-The {\it weight} of an element $n\in cld(v)\sqcup lp(v)$ is 
+The {\it weight} of an element $n\in \ov{cld}(v)$ is 
 $$\begin{cases}
 1,\tn{ if }n\in lp(v)\\
 %\tn{number of elements in }
@@ -717,51 +723,53 @@ For example, if $x$ and $v$ are like this
 then, on the $v$-screen, the marked point 1 has weight 1, the node $n$ has weight $\infty$, and the node $n'$ has weight 3.
 
 \begin{dfn}\label{screennormalize_dfn}
-Now, 
-we define a {\it ``chosen'' representative} $x'_v\in (\R^d)^{cld(v)\sqcup lp(v)}$ 
-%$$x'_v=(p_i(x'_v)\in\R^d)_{i\in cld(v)\sqcup lp(v)}\in (\R^d)^{cld(v)\sqcup lp(v)}$$
-in the equivalence class $x_v\in C_{cld(v)\sqcup lp(v)}(\R^d)$ (recall the equivalence relation here is modulo translation and scaling of $\R^d$):
+Suppose $i,j\in \ov{cld}(v), i\neq j$. 
+We define a {\it standard representative (depending on $i,j$)}, $x'_v\in (\R^d)^{\ov{cld}(v)}$, 
+in the equivalence class $x_v\in C_{\ov{cld}(v)}(\R^d)$ (recall the equivalence relation here is modulo translation and scaling of $\R^d$):
 $x'_v$ is such that 
 \begin{itemize}
-\item $0\in\R^d$ is located at the ``center of gravity'' of points in $cld(v)\sqcup lp(v)$ (for example, in the picture above, the center of gravity of the $v$-screen coincides with the node $n$); note there is a bit of ambiguity: in the case there are 2 elements in $lp(v)\sqcup cld(v)$ with weight $\infty$, we define the center of gravity to be the mid-point of these two elements; 
+\item $0\in\R^d$ is located at the ``center of gravity'' of points in $\ov{cld}(v)$ (for example, in the picture above, the center of gravity of the $v$-screen coincides with the node $n$); note there is a bit of ambiguity: in the case there are 2 elements in $\ov{cld}(v)$ with weight $\infty$, we define the center of gravity to be the mid-point of these two elements; 
 
-\item the scaling is such that 
-$$1=\inf\{r\in\R^{>0}\big|\,\tn{all marked points and nodes are inside of }\D^d(r)\}.$$
+\item the scaling is such that the distance between the points $i$ and $j$ is 1. 
 \end{itemize}
 \end{dfn}
 
-\cmt{Definitions \ref{Rmin_dfn} and \ref{rmax_dfn} can be skipped on first reading.}
+For each $T\in \cT(A)$ and $v\in V(T)$, we choose, arbitrarily, $i\neq j\in \ov{cld}(v)$, and fix these choices for the rest of the document. 
+We can therefore talk about the standard representative $x'_v$ of $x_v$. 
+
+In Section \ref{conftilde_sec}, we will define a smooth manifold structure on $\wt{C}_A$ by ``smoothing out the nodes''. To prepare for this, we next define the largest and smallest radii on each screen where the smoothing can take place. 
 
 \begin{dfn}\label{Rmin_dfn}
-Suppose $x=(x_v)_{v\in V(T)}\in S_T$ and $v\in V(T)$. Define $R^{\min}(x;v)$ as follows: 
+Suppose $x=(x_v)_{v\in V(T)}\in S_T$, $v\in V(T)$. 
+%, and $i\neq j\in \ov{cld}(v)$. 
+Define $R^{\min}(x;v)$ as follows: 
 \begin{itemize}
-\item if $ls(v)=\R^d$, then $R^{\min}(x;v)=2$;
-\item if $ls(v)=\pi_i$, $i=1$ or 2, and $ls(>v)=\emptyset$, 
+\item if $ls(v)=\R^d$, then $R^{\min}(x;v)=$
+$$2\cdot\inf\{R\in\R^{\ge1}\big|\,\tn{in the configuration }x'_v,\tn{ all marked points and nodes are inside }\D^d(R)\};$$
+\item if $ls(v)=\pi_i$, $i=1$ or 2 or $\mr{I}$, and $ls(>v)=\emptyset$, 
 then $R^{\min}(x;v)=$
 $$2\cdot\inf\{R\in\R^{\ge1}\big|\,\tn{in the configuration }x_v,\tn{ all marked points and nodes are inside }E_i(R)\};$$
 \item if $ls(v)=\pi_i$, $i=1$ or 2, and $ls(>v)=\{\pi_{3-i}\}$: denote by $\star_v\in E_i-\sigma_i(B_i)$ the position of the marked point $f_v(\pi_{3-i})$ in the configuration $x_v$, then we can view $x_v$ as an element in 
-$$C_{lp(v)\sqcup cld(v)\backslash\{f_v(E_{3-i})\}}(\pi_i^*E_i)|_{\star_v},$$
+$$C_{\ov{cld}(v)\backslash\{f_v(E_{3-i})\}}(\pi_i^*E_i)|_{\star_v},$$
 where $\pi_i^*E_i$ is the total space of 
 %$\pi_i^*\pi_i:\pi_i^*E_i\to E_i-\sigma_i(B_i)$ 
 the tautological bundle as in Section \ref{trivEI1_subsubsec}, and $(\pi_i^*E_i)|_{\star_v}$ denotes the fiber of $\pi_i^*(E_i)$ over the point $\star_v$;
 now define $R^{\min}(x;v)=$
-$$2\cdot\inf\{R\in\R^{\ge3}\big|\,\tn{in the configuration }x_v,\tn{ all marked points and nodes are inside }\hat E_i(R)\};$$
-\item if $ls(v)=\pi_\rI$, then $R^{\min}(x;v)=$
-$$2\cdot\inf\{R\in\R^{\ge1}\big|\,\tn{in the configuration }x_v,\tn{ all marked points and nodes are inside }E_\rI(R)\}.$$
+$$2\cdot\inf\{R\in\R^{\ge3}\big|\,\tn{in the configuration }x_v,\tn{ all marked points and nodes are inside }\hat E_i(R)\}.$$
 \end{itemize}
 \end{dfn}
 
 \begin{dfn}\label{rmax_dfn}
-Suppose $x=(x_v)_{v\in V(T)}\in S_T$, and $e\in E(T)$. Note that $v_+(e)\in cld(v_-(e))$. If $ls(v_-(e))\neq\R^d$, we denote by $\star_e\in ls(v_-(e))$ the location of the $v_+(e)$-marked point in the configuration $x_{v_-(e)}$; if $ls(v_-(e))=\R^d$, we denote by $\star_e\in\R^d$ the location of the $v_+(e)$-marked point in the configuration representative $x'_{v_(e)}$. 
+Suppose $x=(x_v)_{v\in V(T)}\in S_T$, and $e\in E(T)$. Note that $v_+(e)\in cld(v_-(e))$. If $ls(v_-(e))\neq\R^d$, we denote by $\star_e\in ls(v_-(e))$ the location of the $v_+(e)$-marked point in the configuration $x_{v_-(e)}$; if $ls(v_-(e))=\R^d$, we denote by $\star_e\in\R^d$ the location of the $v_+(e)$-marked point in the standard representative $x'_{v_-(e)}$. 
 Define $r^{\max}(x;e)$ as follows:
 \begin{itemize}
 \item if $ls(v_-(e))=\R^d$, then 
 \begin{align*}
-r^{\max}(x;e)=\frac{1}{2}\cdot\sup\{r\in&\R^{<1}\big|\,\tn{in the configuration representative }x'_{v_-(e)},\\
+r^{\max}(x;e)=\frac{1}{2}\cdot\sup\{r\in&\R^{<1}\big|\,\tn{in the standard representative }x'_{v_-(e)},\\
 &\tn{ all marked points and nodes, except for }\star_e, \tn{ are outside }\D_{\star_e}(r)\};
 \end{align*}
 \item if $ls(v_-(e))=\pi_\rI$ or $\pi_i$, $i=1$ or 2, 
-then (recall the definition of $D_{\star_e}(r)$ from (\ref{Ddef_eqn}))
+then (recall the definition of $D_{\star_e}(r)$ from (\ref{Ddef_eqn}) using the exponential map)
 \begin{align*}
 r^{\max}(x;e)=\frac{1}{2}\cdot\sup\{r\in&\R^{<\tn{radius}^{\max}(\star_e)}\big|\,\tn{in the configuration }x_{v_-(e)},\\
 &\tn{ all marked points and nodes, except for }\star_e, \tn{ are outside }D_{\star_e}(r)\}.
@@ -791,22 +799,87 @@ It is easy to see that $\epsilon^{\max}_{T;e}$ is smooth. Note that the infimum 
 \label{conftilde_sec}
 
 Recall we defined $\wt{C}_A=\bigsqcup_{T\in\cT(A)}S_T$ as a set. 
-In this section we define the smooth-manifold-with-boundary-and-corners structure on $\wt{C}_A$. 
+In this section we define the smooth-manifold-with-corners structure on $\wt{C}_A$. 
 %, with stratification structure coinciding with $\{S_T\}$. 
 
 
 For each $T\in\cT(A)$, define (``dom'' stands for ``domain'')
-$$\dom(T)=\big\{\big(x,(\epsilon_e)_{e\in E(T)}\big)\in S_T\times(\R^{\ge0})^{E(T)}\big|\,\forall\,e, \epsilon_e<\epsilon^{\max}_{T;e}\big\}.$$
+$$\dom(T)=\big\{\big(x,(\epsilon_e)_{e\in E(T)}\big)\in S_T\times(\R^{\ge0})^{E(T)}\big|\,\forall\,e, \epsilon_e<\epsilon^{\max}_{T;e}(x)\big\}.$$
 For $e\in E(T)$, also define
-$$\dom(T;e)=\big\{\big(x,\epsilon_e\big)\in S_T\times\R^{\ge0}\big|\, \epsilon_e<\epsilon^{\max}_{T;e}\big\}.$$
-We will construct injective maps 
+$$\dom(T;e)=\big\{\big(x,\epsilon_e\big)\in S_T\times\R^{\ge0}\big|\, \epsilon_e<\epsilon^{\max}_{T;e}(x)\big\}.$$
+
+The strategy now is as follows: since we have already defined each stratum of $\wt{C}_A$ as a smooth manifold, we define the smooth structure on $\wt{C}_A$ by considering how to ``glue the neighborhoods of each $S_T$ together''. 
+By ``the neighborhood of $S_T$'' we mean $\dom(T)$. 
+More precisely, for each $T$, we will construct a map 
 $$\psi_T:\dom(T)\longrightarrow \widetilde{C}_A$$
-such that $\psi_T|_{S_T\times(0,\ldots,0)}$ is the identity map on $S_T$. 
-These maps will serve as smooth charts for $\widetilde{C}_A$.
-After defining these maps, we need to check that the transition maps are smooth.  
+such that, 
+\begin{enumerate}
+\item \label{psi1_item} $\psi_T$ is injective, and its image is ;
+
+\item \label{psi2_item} $\psi_T|_{S_T\times(0,\ldots,0)}$ is the identity map on $S_T$; 
+
+\item \label{psi3_item} for each $I\subset E(T)$, define 
+$$\dom^I(T):=\{(x,(\epsilon_e)_e)\in\dom(T) |\,\epsilon_e=0\  \forall e\in I\}\subset \dom(T)$$
+the ``$I$-face of $\dom(T)$'',  then, 
+$\psi_T(\dom^I(T))\subset S_{T/(E(T)-I)}$
+and 
+$$\psi_T|_{\dom^I(T)}:\dom^I(T)\longrightarrow S_{T/(E(T)-I)}$$
+is smooth. 
+
+\item \label{psi4_item} for all $T_1,T_2\in\cT(A)$, $\psi_{T_2}^{-1}(\tn{image}(\psi_{T_1})\cap\tn{image}(\psi_{T_2}))$ is an open subset of $\dom(T_2)$, and the ``transition map'' 
+$$\psi_{T_1}^{-1}\circ\psi_{T_2}\big|_{\psi_{T_2}^{-1}(\tn{image}(\psi_{T_1})\cap\tn{image}(\psi_{T_2}))}:\psi_{T_2}^{-1}(\tn{image}(\psi_{T_1})\cap\tn{image}(\psi_{T_2}))\longrightarrow \dom(T_1)$$
+is smooth. 
+\end{enumerate}
+  
+One can easily check that these $\psi_T$ induces a smooth atlas on $\wt{C}$: for each point $p\in\wt{C}$, using either the main stratum of $\wt{C}$ or some $\psi_T$ whose image contains $p$, we can define a smooth chart on a neighborhood of $p$; the last condition above ensures that for different choices of $\psi_T$, these charts are compatible. 
+
+The process of defining $\psi_T$ is by smoothing out the nodes. 
+
+\begin{dfn}
+\cmt{Define $\psi_T$. It may be sufficient to just draw a picture of a general element $x\i nS_T$ and say ``$\psi_T(x,(\epsilon_e)_e)$ is defined by, around each node $e$, we remove a $1/R$-neighborhood from the screen above and remove an $r$-neighborhood from the screen below (where $R>R^{min}(...)$ and $r<r^{max}(...)$ are such that $r/R=\epsilon_e$), then glue the created boundaries together using the framings''...}
+\end{dfn}
+
+\begin{crl}
+The conditions \ref{psi2_item}, \ref{psi3_item} above follows immediately from the definition. 
+\end{crl}
+
+\begin{lmm}
+$\psi_T$ is injective. 
+\end{lmm}
+\begin{proof}
+\cmt{This follows immediately from the ``Riemannian center of mass'' notion in \cite{GroveKarcher}.}
+\end{proof}
+
+\begin{lmm}
+Suppose $T_1,T_2\in\cT(A)$, and one of them can be obtained from the other by contracting some edges.  
+\begin{itemize}
+\item $\psi_{T_2}^{-1}(\tn{image}(\psi_{T_1})\cap\tn{image}(\psi_{T_2}))\subset\dom(T_2)$ is of the form 
+$$\big\{\big(x,(\epsilon_e)_{e\in E(T_2)}\big)\in \dom(T_2)\subset S_{T_2}\times(\R^{\ge0})^{E(T_2)}\big|\,\forall\,e, \epsilon_e<\epsilon'_e(x)\big\},$$
+where $\epsilon'_e(x)\le \epsilon^{\max}_{T_2;e}(x)$ are smooth functions on $S_{T_2}$. 
+\item 
+\begin{align*}
+\psi_{T_1}^{-1}\circ\psi_{T_2}\big|_{\psi_{T_2}^{-1}(\tn{image}(\psi_{T_1})\cap\tn{image}(\psi_{T_2}))}:
+\big\{\big(x,(\epsilon_e)_{e\in E(T_2)}\big)\in S_{T_2}\times(\R^{\ge0})^{E(T_2)}\big|\,\forall\,e, \epsilon_e<\epsilon'_e(x)\big\}\\
+\longrightarrow
+\big\{\big(x,(\epsilon_e)_{e\in E(T_1)}\big)\in S_{T_1}\times(\R^{\ge0})^{E(T_1)}\big|\,\forall\,e, \epsilon_e<\epsilon^{\max}_{T_1;e}(x)\big\}
+\end{align*}
+is given by: 
+$$
+\big(x,(\epsilon_e)_{e\in E(T_2)}\big)\longrightarrow \big( \psi_{T_1}(x,(...=0)), (\tn{smooth functions in }x, \{\epsilon_e'\}_{e'})_e \big)
+$$
+\end{itemize}
+\end{lmm}
+
+\begin{proof}
+
+\end{proof}
+
+\begin{rmk}
+If we have used a different $i,j$ in Definition \ref{screennormalize_dfn}, and denote by $\psi'_T$ instead of $\psi_T$ the map thus obtained, then $(\psi'_T)^{-1}\circ\psi_T$ can be easily seen to also be a smooth map defined on an open subset of $\dom(T)$. So, the choices of $i,j$ in defining the standard representative does not matter for our purpose here. 
+\end{rmk}
 
 
-The process of defining $\psi_T$ is by smoothing out the nodes. We first define how to smooth out one node. 
+
 
 \subsection{Smoothing out one node}
 
@@ -979,7 +1052,7 @@ Therefore, $\wt{C}_A$ is a well-defined smooth manifold with boundary and corner
 If $A'\subset A$ is a finite subset, then we have an obviously-defined forgetful map $f_{A,A'}:\wt{C}_A\to\wt{C}_{A'}$. 
 
 \begin{lmm}
-$f_{A,A'}:\wt{C}_A\to\wt{C}_{A'}$ is smooth. \cmt{proof not yet written}
+$f_{A,A'}:\wt{C}_A\to\wt{C}_{A'}$ is smooth. \cmt{proof not yet written. Note that the forgetful maps are not smooth in the sense of Joyce's paper ``Manifold with corners''; smoothness here means ``weakly smooth'' there.}
 \end{lmm}
 
 

@@ -58,6 +58,7 @@
 \setlength{\parindent}{0cm}
 
 \section{Basic notion}
+\label{basic_sec}
 
 For any $n\in\Z^{>0},\epsilon\in\R^{>0},p\in\R^d$, denote by $\D^n_p(\epsilon)\subset\R^n$ the (closed) $n$-dimensional ball centered at $p$ and of radius $\epsilon$; denote by $\mr\D^n_p(\epsilon)$ its interior. 
 If $p=0$ or $\epsilon=1$, we omit it from the notation. 
@@ -193,6 +194,7 @@ D_p(\epsilon):=\exp_p\circ (F|_p)^{-1}(\D^d(\epsilon))\subset E_i|_{\pi_i(p)}.
 
 
 \section{Defining the bracket bundle}
+\label{bracketbundle_sec}
 
 In this section, for $0<t<\rho$, we define the bracket bundle, $\pi^t:E^t\to B^t$ ($t$ is the ``gluing parameter''). 
 
@@ -805,8 +807,8 @@ In this section we define the smooth-manifold-with-corners structure on $\wt{C}_
 
 For each $T\in\cT(A)$, define (``dom'' stands for ``domain'')
 $$\dom(T)=\big\{\big(x,(\epsilon_e)_{e\in E(T)}\big)\in S_T\times(\R^{\ge0})^{E(T)}\big|\,\forall\,e, \epsilon_e<\epsilon^{\max}_{T;e}(x)\big\}.$$
-For $e\in E(T)$, also define
-$$\dom(T;e)=\big\{\big(x,\epsilon_e\big)\in S_T\times\R^{\ge0}\big|\, \epsilon_e<\epsilon^{\max}_{T;e}(x)\big\}.$$
+%For $e\in E(T)$, also define
+%$$\dom(T;e)=\big\{\big(x,\epsilon_e\big)\in S_T\times\R^{\ge0}\big|\, \epsilon_e<\epsilon^{\max}_{T;e}(x)\big\}.$$
 
 The strategy now is as follows: since we have already defined each stratum of $\wt{C}_A$ as a smooth manifold, we define the smooth structure on $\wt{C}_A$ by considering how to ``glue the neighborhoods of each $S_T$ together''. 
 By ``the neighborhood of $S_T$'' we mean $\dom(T)$. 
@@ -814,13 +816,13 @@ More precisely, for each $T$, we will construct a map
 $$\psi_T:\dom(T)\longrightarrow \widetilde{C}_A$$
 such that, 
 \begin{enumerate}
-\item \label{psi1_item} $\psi_T$ is injective, and its image is ;
+\item \label{psi1_item} $\psi_T$ is injective;
 
 \item \label{psi2_item} $\psi_T|_{S_T\times(0,\ldots,0)}$ is the identity map on $S_T$; 
 
-\item \label{psi3_item} for each $I\subset E(T)$, define 
-$$\dom^I(T):=\{(x,(\epsilon_e)_e)\in\dom(T) |\,\epsilon_e=0\  \forall e\in I\}\subset \dom(T)$$
-the ``$I$-face of $\dom(T)$'',  then, 
+\item \label{psi3_item} for each $I\subset E(T)$, define the ``$I$-face of $\dom(T)$''
+%$$\dom^I(T):=\{(x,(\epsilon_e)_e)\in\dom(T) |\,\epsilon_e=0\  \forall e\in I\}\subset \dom(T),$$
+then, 
 $\psi_T(\dom^I(T))\subset S_{T/(E(T)-I)}$
 and 
 $$\psi_T|_{\dom^I(T)}:\dom^I(T)\longrightarrow S_{T/(E(T)-I)}$$
@@ -830,14 +832,38 @@ is smooth.
 $$\psi_{T_1}^{-1}\circ\psi_{T_2}\big|_{\psi_{T_2}^{-1}(\tn{image}(\psi_{T_1})\cap\tn{image}(\psi_{T_2}))}:\psi_{T_2}^{-1}(\tn{image}(\psi_{T_1})\cap\tn{image}(\psi_{T_2}))\longrightarrow \dom(T_1)$$
 is smooth. 
 \end{enumerate}
+
+Notice that the above definition includes when $T$ has only one vertex, in which case $\dom_T=S_T$ which is the main stratum, and $\psi_T=\tn{Id}_{S_T}$. 
   
-One can easily check that these $\psi_T$ induces a smooth atlas on $\wt{C}$: for each point $p\in\wt{C}$, using either the main stratum of $\wt{C}$ or some $\psi_T$ whose image contains $p$, we can define a smooth chart on a neighborhood of $p$; the last condition above ensures that for different choices of $\psi_T$, these charts are compatible. 
+One can easily check that these $\psi_T$ induces a topology and a smooth atlas on $\wt{C}_A$: for each point $p\in\wt{C}_A$, using either the main stratum of $\wt{C}_A$ or some $\psi_T$ whose image contains $p$, we can define a smooth chart on a neighborhood of $p$; the last condition above ensures that for different choices of $\psi_T$, these charts are compatible. 
 
-The process of defining $\psi_T$ is by smoothing out the nodes. 
+The process of defining $\psi_T$ is by smoothing out the nodes, which we describe now. 
 
-\begin{dfn}
-\cmt{Define $\psi_T$. It may be sufficient to just draw a picture of a general element $x\i nS_T$ and say ``$\psi_T(x,(\epsilon_e)_e)$ is defined by, around each node $e$, we remove a $1/R$-neighborhood from the screen above and remove an $r$-neighborhood from the screen below (where $R>R^{min}(...)$ and $r<r^{max}(...)$ are such that $r/R=\epsilon_e$), then glue the created boundaries together using the framings''...}
-\end{dfn}
+Suppose $x=(x_v)_{v\in V(T)}\in S_T$ is pictorially represented by a tree of configurations, e.g. the one below, 
+
+\includegraphics[scale=0.15]{x_fig}
+
+by using the ``standard representations'' specified in Definition \ref{screennormalize_dfn}, 
+we can view $x$ as literally a ``nodal'' space -- a space $X=\bigvee_{v\in V(T)}X_v$ obtained by wedging finitely many manifolds together (for the example here, a copy of $E_1|_{b_1}$, $E_2|_{b_2}$ and some copies of $S^d=\R^d\sqcup\{\infty\}$ are wedged together), together with $A$-many marked points scattered in it. 
+Each component $X_v$, minus the lower node (``$\infty$''), now has a metric on it -- on the $S^d$-component it is the standard metric on $R^d$ and on the $E_1,E_2,E_{\mr{I}}$ components they are the metrics specified in Sections \ref{basic_sec},\ref{bracketbundle_sec}. 
+Given a component $X_v$ of this nodal space and a point $p\in X_v$, if $p$ is not the lower node of $X_v$, we can talk about the ``ball of radius $r$ in $X_v$ centered at $p$'' to be given by the metric and the induced exponential map on $X_v$. 
+If $p$ is the lower node, since each $X_v$ also has a specified ``identification with $\R^d$ near infinity'' near its lower node, we define the ``ball of radius $1/R$ centered at $p$'' to be $\{\infty\}\sqcup\R^d\backslash\D^d(R)$ under this identification. 
+%\begin{itemize}
+%\item $X_v\backslash\D^d(R)$ if $X_v=S^d$; 
+%\item $X_v\backslash E_i(R)|_{b_i}$ if $X_v=E_i|_{b_i}$ for $i=1,2$, and $ls(>v)=\emptyset$; 
+%\item $X_v\backslash \hat{E}_i(R)|_{b_i}$
+%\end{itemize}
+
+To construct $\psi_T(x,(\epsilon_e)_{e\in E(T)})$, 
+for each node corresponding to $e\in E(T)$, we remove the ball of radius $r$ centered at the node from $X_{v_-(e)}$ and the ball of radius $1/R$ centered at the node from $X_{v_+e}$, where $r,R\ge0$ are chosen arbitrarily satisfying $r/R=\epsilon_e$, $r<r^{\min}(x;e)$, $R>R^{\max}(x;v_+(e))$; 
+we then glue the two boundaries together, forming a new (maybe nodal) space with $A$-many marked points on it. This space, together with the marked points, represent an element in $\wt{C}_A$, which we define $\psi_T(x,(\epsilon_e)_{e\in E(T)})$ to be. 
+
+\includegraphics[scale=0.15]{xcut_fig}
+\hspace{3cm}
+\includegraphics[scale=0.15]{xglue_fig}
+ 
+This gives the definition of $\psi_T$. Since writing it down in fully formal terms is tedious and seems unnecessary, we will not do so here. 
+The interested readers can write down the map in the term of formal formulas and the following corollary would be clear:  
 
 \begin{crl}
 The conditions \ref{psi2_item}, \ref{psi3_item} above follows immediately from the definition. 

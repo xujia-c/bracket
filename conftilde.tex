@@ -44,6 +44,7 @@
 \def\cM{\mathcal{M}}
 \def\cT{\mathcal{T}}
 \def\cN{\mathcal{N}}
+\def\ff{\mathfrak{f}}
 \def\rI{{\mathring{I}}}
 \def\dom{{\tn{dom}}}
 
@@ -810,6 +811,8 @@ $$\dom(T)=\big\{\big(x,(\epsilon_e)_{e\in E(T)}\big)\in S_T\times(\R^{\ge0})^{E(
 %For $e\in E(T)$, also define
 %$$\dom(T;e)=\big\{\big(x,\epsilon_e\big)\in S_T\times\R^{\ge0}\big|\, \epsilon_e<\epsilon^{\max}_{T;e}(x)\big\}.$$
 
+\cmt{The definition of $\dom(T)$ may need to be changed to make the range of those $\epsilon$ even smaller.}
+
 The strategy now is as follows: since we have already defined each stratum of $\wt{C}_A$ as a smooth manifold, we define the smooth structure on $\wt{C}_A$ by considering how to ``glue the neighborhoods of each $S_T$ together''. 
 By ``the neighborhood of $S_T$'' we mean $\dom(T)$. 
 More precisely, for each $T$, we will construct a map 
@@ -821,14 +824,16 @@ such that,
 \item \label{psi2_item} $\psi_T|_{S_T\times(0,\ldots,0)}$ is the identity map on $S_T$; 
 
 \item \label{psi3_item} for each $I\subset E(T)$, define the ``$I$-face of $\dom(T)$''
-%$$\dom^I(T):=\{(x,(\epsilon_e)_e)\in\dom(T) |\,\epsilon_e=0\  \forall e\in I\}\subset \dom(T),$$
+$$\dom^I(T):=\{(x,(\epsilon_e)_e)\in\dom(T) |\,\epsilon_e=0 \tn{ iff } e\in I\}\subset \dom(T),$$
 then, 
 $\psi_T(\dom^I(T))\subset S_{T/(E(T)-I)}$
 and 
 $$\psi_T|_{\dom^I(T)}:\dom^I(T)\longrightarrow S_{T/(E(T)-I)}$$
-is smooth. 
+is smooth; 
 
-\item \label{psi4_item} for all $T_1,T_2\in\cT(A)$, $\psi_{T_2}^{-1}(\tn{image}(\psi_{T_1})\cap\tn{image}(\psi_{T_2}))$ is an open subset of $\dom(T_2)$, and the ``transition map'' 
+\item \label{psi4_item} $\psi_T|_{\dom^I(T)}$ above has smooth inverse from its image; 
+
+\item \label{psi5_item} for all $T_1,T_2\in\cT(A)$, $\psi_{T_2}^{-1}(\tn{image}(\psi_{T_1})\cap\tn{image}(\psi_{T_2}))$ is an open subset of $\dom(T_2)$, and the ``transition map'' 
 $$\psi_{T_1}^{-1}\circ\psi_{T_2}\big|_{\psi_{T_2}^{-1}(\tn{image}(\psi_{T_1})\cap\tn{image}(\psi_{T_2}))}:\psi_{T_2}^{-1}(\tn{image}(\psi_{T_1})\cap\tn{image}(\psi_{T_2}))\longrightarrow \dom(T_1)$$
 is smooth. 
 \end{enumerate}
@@ -856,11 +861,17 @@ If $p$ is the lower node, since each $X_v$ also has a specified ``identification
 
 To construct $\psi_T(x,(\epsilon_e)_{e\in E(T)})$, 
 for each node corresponding to $e\in E(T)$, we remove the ball of radius $r$ centered at the node from $X_{v_-(e)}$ and the ball of radius $1/R$ centered at the node from $X_{v_+e}$, where $r,R\ge0$ are chosen arbitrarily satisfying $r/R=\epsilon_e$, $r<r^{\min}(x;e)$, $R>R^{\max}(x;v_+(e))$; 
-we then glue the two boundaries together, forming a new (maybe nodal) space with $A$-many marked points on it. This space, together with the marked points, represent an element in $\wt{C}_A$, which we define $\psi_T(x,(\epsilon_e)_{e\in E(T)})$ to be. 
+we then glue the two boundaries together, forming a new (maybe nodal) space with $A$-many marked points on it.
+(For those $e$ such that $\epsilon_e=0$, we do not do anything to the corresponding node.) 
+This space, together with the marked points, represent an element in $\wt{C}_A$\footnote{
+\cmt{One needs to be careful here to rigorously define how to translate this ``nodal space with points'' description back to an element in $\wt{C}_A$. That this can be done is because that we constructed $\pi_{\mr{I}}$ very explicitly in Section \ref{conftilde_sec}. We omit the details.}
+}, which we define $\psi_T(x,(\epsilon_e)_{e\in E(T)})$ to be. 
 
 \includegraphics[scale=0.15]{xcut_fig}
 \hspace{3cm}
 \includegraphics[scale=0.15]{xglue_fig}
+
+\cmt{These pictures are not optimal. I'll draw them a bit differently later.}
  
 This gives the definition of $\psi_T$. Since writing it down in fully formal terms is tedious and seems unnecessary, we will not do so here. 
 The interested readers can write down the map in the term of formal formulas and the following corollary would be clear:  
@@ -876,22 +887,45 @@ $\psi_T$ is injective.
 \cmt{This follows immediately from the ``Riemannian center of mass'' notion in \cite{GroveKarcher}.}
 \end{proof}
 
+\begin{lmm}%[Lemma-Definition]
+Condition \ref{psi4_item} above holds.
+\end{lmm}
+
+\begin{proof}
+\cmt{This uses that, by construction, $E_{\mr{I}}$ remembers where the ``centers'' of the $E_1$ or/and $E_2$ making up to it are; it also uses that the Riemannian center of mass depends smoothly on the marked points. }
+\end{proof}
+
 \begin{lmm}
-Suppose $T_1,T_2\in\cT(A)$, and one of them can be obtained from the other by contracting some edges.  
+Suppose $T_1\in\cT(A)$, $I\subset E(T_1)$, and $T_2=T_1/I\in \cT(A)$. Then:
 \begin{itemize}
+\item $\psi_{T_1}^{-1}(\tn{image}(\psi_{T_1})\cap\tn{image}(\psi_{T_2}))=\dom(T_1)\big\backslash\cup_{I'\subset I}\dom^I(T_1),$ hence is an open subset of $\dom(T_1)$. 
 \item $\psi_{T_2}^{-1}(\tn{image}(\psi_{T_1})\cap\tn{image}(\psi_{T_2}))\subset\dom(T_2)$ is of the form 
-$$\big\{\big(x,(\epsilon_e)_{e\in E(T_2)}\big)\in \dom(T_2)\subset S_{T_2}\times(\R^{\ge0})^{E(T_2)}\big|\,\forall\,e, \epsilon_e<\epsilon'_e(x)\big\},$$
-where $\epsilon'_e(x)\le \epsilon^{\max}_{T_2;e}(x)$ are smooth functions on $S_{T_2}$. 
+$$\big\{\big(x,(\epsilon_e)_{e\in E(T_2)}\big)\in 
+S_{T_2}\times(\R^{\ge0})^{E(T_2)}\big|\,x\in S',\tn{ and }\forall\,e, \epsilon_e<\epsilon'_e(x)\big\},$$
+for some open subset $S'\subset S_{T_2}$ and smooth functions $\epsilon'_e\le \epsilon^{\max}_{T_2;e}$  on $S'$.
+So, it is also an open subset of $\dom(T_1)$.  
 \item 
 \begin{align*}
 \psi_{T_1}^{-1}\circ\psi_{T_2}\big|_{\psi_{T_2}^{-1}(\tn{image}(\psi_{T_1})\cap\tn{image}(\psi_{T_2}))}:
-\big\{\big(x,(\epsilon_e)_{e\in E(T_2)}\big)\in S_{T_2}\times(\R^{\ge0})^{E(T_2)}\big|\,\forall\,e, \epsilon_e<\epsilon'_e(x)\big\}\\
+\big\{\big(x,(\epsilon_e)_{e\in E(T_2)}\big)\in S'\times(\R^{\ge0})^{E(T_2)}\big|\,\forall\,e, \epsilon_e<\epsilon'_e(x)\big\}\\
 \longrightarrow
 \big\{\big(x,(\epsilon_e)_{e\in E(T_1)}\big)\in S_{T_1}\times(\R^{\ge0})^{E(T_1)}\big|\,\forall\,e, \epsilon_e<\epsilon^{\max}_{T_1;e}(x)\big\}
 \end{align*}
 is given by: 
 $$
-\big(x,(\epsilon_e)_{e\in E(T_2)}\big)\longrightarrow \big( \psi_{T_1}(x,(...=0)), (\tn{smooth functions in }x, \{\epsilon_e'\}_{e'})_e \big)
+\big(x,(\epsilon_e)_{e\in E(T_2)}\big)\longrightarrow \Big( 
+\psi_{T_1}\big(x,(\delta_{e,I}\cdot\epsilon_e)_{e\in E(T_2)}\big), (\tn{smooth functions in }x\tn{ and }(\epsilon_e)_{e\in E(T_2)}
+\Big), 
+$$
+where $\delta_{e,I}=\begin{cases}1, \tn{ if }e\in I\\ 0, \tn{ if }e\notin I.\end{cases}$
+
+\item 
+\cmt{?}$\psi_{T_2}^{-1}\circ\psi_{T_1}\big|_{\psi_{T_1}^{-1}(\tn{image}(\psi_{T_1})\cap\tn{image}(\psi_{T_2}))}$
+is given by: 
+$$
+\big(x,(\epsilon_e)_{e\in E(T_1)}\big)\longrightarrow \Big( 
+\psi_{T_1}^{-1}\big(x,(\delta_{e,I}\cdot\epsilon_e)_{e\in E(T_2)}\big), (\tn{smooth functions in }x\tn{ and }(\epsilon_e)_{e\in E(T_2)}
+\Big). 
 $$
 \end{itemize}
 \end{lmm}
@@ -904,6 +938,22 @@ $$
 If we have used a different $i,j$ in Definition \ref{screennormalize_dfn}, and denote by $\psi'_T$ instead of $\psi_T$ the map thus obtained, then $(\psi'_T)^{-1}\circ\psi_T$ can be easily seen to also be a smooth map defined on an open subset of $\dom(T)$. So, the choices of $i,j$ in defining the standard representative does not matter for our purpose here. 
 \end{rmk}
 
+\begin{crl}
+The $\psi_T$ we constructed satisfies the required conditions, so $\wt{C}_A$ is a well-defined smooth manifold with corners. For $T\in\cT(A)$, $S_T\subset \wt{C}_A$ is a codimension-$|E(T)|$ stratum. 
+\end{crl}
+
+Suppose $A'\subset A$ is a finite subset, then we have an obviously-defined forgetful map $\ff_{A',A}:\wt{C}_A\to\wt{C}_{A'}$. 
+
+\begin{prp}
+$f_{A,A'}:\wt{C}_A\to\wt{C}_{A'}$ is smooth. 
+Moreover, for every (open) stratum $S$ of $\wt{C}_{A}$, $\ff_{A',A}(S)$ is again an open stratum of $\wt{C}_{A'}$ and 
+$$\ff_{A',A}|_S:S\longrightarrow \ff_{A',A}(S)$$
+is a submersion. 
+\end{prp}
+
+\begin{proof}
+
+\end{proof}
 
 
 
@@ -1072,7 +1122,7 @@ $\psi_T$ doesn't depend on the choice of order on $E(T)$.
 
 \begin{crl}
 For $T\neq T'\in \cT(A)$, the transition map $\psi_{T'}^{-1}\circ\psi_{T}|_{\psi_T^{-1}(\tn{image}(\psi_T)\cap\tn{image}(\psi_{T'}))}$ is smooth. 
-Therefore, $\wt{C}_A$ is a well-defined smooth manifold with boundary and corners. For $T\in\cT(A)$, $S_T\subset \wt{C}_A$ is a codimension-$|E(T)|$ stratum. 
+Therefore, $\wt{C}_A$ is a well-defined smooth manifold with corners. For $T\in\cT(A)$, $S_T\subset \wt{C}_A$ is a codimension-$|E(T)|$ stratum. 
 \end{crl}
 
 If $A'\subset A$ is a finite subset, then we have an obviously-defined forgetful map $f_{A,A'}:\wt{C}_A\to\wt{C}_{A'}$. 

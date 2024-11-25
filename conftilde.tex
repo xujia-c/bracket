@@ -725,6 +725,8 @@ For example, if $x$ and $v$ are like this
 
 then, on the $v$-screen, the marked point 1 has weight 1, the node $n$ has weight $\infty$, and the node $n'$ has weight 3.
 
+\cmt{Note the newly defined notation $\ov{cld}(v):=lp(v)\sqcup cld(v)$.}
+
 \begin{dfn}\label{screennormalize_dfn}
 Suppose $i,j\in \ov{cld}(v), i\neq j$. 
 We define a {\it standard representative (depending on $i,j$)}, $x'_v\in (\R^d)^{\ov{cld}(v)}$, 
@@ -840,7 +842,13 @@ is smooth.
 
 Notice that the above definition includes when $T$ has only one vertex, in which case $\dom_T=S_T$ which is the main stratum, and $\psi_T=\tn{Id}_{S_T}$. 
   
-One can easily check that these $\psi_T$ induces a topology and a smooth atlas on $\wt{C}_A$: for each point $p\in\wt{C}_A$, using either the main stratum of $\wt{C}_A$ or some $\psi_T$ whose image contains $p$, we can define a smooth chart on a neighborhood of $p$; the last condition above ensures that for different choices of $\psi_T$, these charts are compatible. 
+\begin{lmm} 
+These $\psi_T$ induces a topology and a smooth atlas on $\wt{C}_A$. 
+\end{lmm}
+
+\begin{proof}
+\cmt{For each point $p\in\wt{C}_A$, using either the main stratum of $\wt{C}_A$ or some $\psi_T$ whose image contains $p$, we can define a smooth chart on a neighborhood of $p$; the last condition above ensures that for different choices of $\psi_T$, these charts are compatible. }
+\end{proof}
 
 The process of defining $\psi_T$ is by smoothing out the nodes, which we describe now. 
 
@@ -863,8 +871,9 @@ To construct $\psi_T(x,(\epsilon_e)_{e\in E(T)})$,
 for each node corresponding to $e\in E(T)$, we remove the ball of radius $r$ centered at the node from $X_{v_-(e)}$ and the ball of radius $1/R$ centered at the node from $X_{v_+e}$, where $r,R\ge0$ are chosen arbitrarily satisfying $r/R=\epsilon_e$, $r<r^{\min}(x;e)$, $R>R^{\max}(x;v_+(e))$; 
 we then glue the two boundaries together, forming a new (maybe nodal) space with $A$-many marked points on it.
 (For those $e$ such that $\epsilon_e=0$, we do not do anything to the corresponding node.) 
-This space, together with the marked points, represent an element in $\wt{C}_A$\footnote{
-\cmt{One needs to be careful here to rigorously define how to translate this ``nodal space with points'' description back to an element in $\wt{C}_A$. That this can be done is because that we constructed $\pi_{\mr{I}}$ very explicitly in Section \ref{conftilde_sec}. We omit the details.}
+This space, together with the marked points, represent an element in $\wt{C}_A$
+\footnote{
+\cmt{One needs to be careful here to rigorously define how to translate this ``nodal space with points'' description back to an element in $\wt{C}_A$. That this can be done is because that we constructed $\pi_{\mr{I}}$ very explicitly in Section \ref{conftilde_sec}.}
 }, which we define $\psi_T(x,(\epsilon_e)_{e\in E(T)})$ to be. 
 
 \includegraphics[scale=0.15]{xcut_fig}
@@ -872,9 +881,27 @@ This space, together with the marked points, represent an element in $\wt{C}_A$\
 \includegraphics[scale=0.15]{xglue_fig}
 
 \cmt{These pictures are not optimal. I'll draw them a bit differently later.}
- 
-This gives the definition of $\psi_T$. Since writing it down in fully formal terms is tedious and seems unnecessary, we will not do so here. 
-The interested readers can write down the map in the term of formal formulas and the following corollary would be clear:  
+
+This gives us the intuitive definition of $\psi_T$. Below we give the precise definition. 
+\cmt{If you think the above description is enough, we can also just say ``the precise description is easy but tedious so we don't write.}
+
+
+\begin{dfn}
+\cmt{
+Define $\psi_T(x;(\epsilon_e)_e)$. 
+It seems to me that the most convenient way of doing so (at least if we smooth all nodes at once) is to consider the following 3 cases separately: \\
+(1) one of the vertices of $T$ has space label $\pi_{\mr{I}}$, and no vertices with space label $\pi_1$ or $\pi_2$; \\
+(2) $T$ has two vertices with space label $\pi_1$ and $\pi_2$, respectively, and the path connecting these two vertices in $T$ goes through the root $r$; \\
+(3) same as (2), but the path does not go through $r$.\\ 
+For cases (2) and (3), we first specify what the space would be (if all nodes along the path have positive $\epsilon$, then this means specifying a fiber of $\pi_{\mr{I}}$) after the smoothing, then specify, one by one maybe, where the marked points are located after smoothing, probably using a formula involving exponential maps.  
+}
+\end{dfn}
+
+ \begin{rmk}
+If we have used a different $i,j$ in Definition \ref{screennormalize_dfn}, and denote by $\psi'_T$ instead of $\psi_T$ the map thus obtained, then $(\psi'_T)^{-1}\circ\psi_T$ can be easily seen to also be a smooth map defined on an open subset of $\dom(T)$. So, the choices of $i,j$ in defining the standard representative does not matter for our purpose here. 
+\end{rmk}
+
+The following corollary is clear:  
 
 \begin{crl}
 The conditions \ref{psi2_item}, \ref{psi3_item} above follows immediately from the definition. 
@@ -884,7 +911,7 @@ The conditions \ref{psi2_item}, \ref{psi3_item} above follows immediately from t
 $\psi_T$ is injective. 
 \end{lmm}
 \begin{proof}
-\cmt{This follows immediately from the ``Riemannian center of mass'' notion in \cite{GroveKarcher}.}
+\cmt{This follows from the ``Riemannian center of mass'' notion in \cite{GroveKarcher}.}
 \end{proof}
 
 \begin{lmm}%[Lemma-Definition]
@@ -920,23 +947,19 @@ $$
 where $\delta_{e,I}=\begin{cases}1, \tn{ if }e\in I\\ 0, \tn{ if }e\notin I.\end{cases}$
 
 \item 
-\cmt{?}$\psi_{T_2}^{-1}\circ\psi_{T_1}\big|_{\psi_{T_1}^{-1}(\tn{image}(\psi_{T_1})\cap\tn{image}(\psi_{T_2}))}$
-is given by: 
-$$
-\big(x,(\epsilon_e)_{e\in E(T_1)}\big)\longrightarrow \Big( 
-\psi_{T_1}^{-1}\big(x,(\delta_{e,I}\cdot\epsilon_e)_{e\in E(T_2)}\big), (\tn{smooth functions in }x\tn{ and }(\epsilon_e)_{e\in E(T_2)}
-\Big). 
-$$
+$\psi_{T_2}^{-1}\circ\psi_{T_1}\big|_{\psi_{T_1}^{-1}(\tn{image}(\psi_{T_1})\cap\tn{image}(\psi_{T_2}))}$
+is given by: \cmt{?}
+%$$
+%\big(x,(\epsilon_e)_{e\in E(T_1)}\big)\longrightarrow \Big( 
+%\psi_{T_1}^{-1}\big(x,(\delta_{e,I}\cdot\epsilon_e)_{e\in E(T_2)}\big), (\tn{smooth functions in }x\tn{ and }(\epsilon_e)_{e\in E(T_2)}
+%\Big). 
+%$$
 \end{itemize}
 \end{lmm}
 
 \begin{proof}
 
 \end{proof}
-
-\begin{rmk}
-If we have used a different $i,j$ in Definition \ref{screennormalize_dfn}, and denote by $\psi'_T$ instead of $\psi_T$ the map thus obtained, then $(\psi'_T)^{-1}\circ\psi_T$ can be easily seen to also be a smooth map defined on an open subset of $\dom(T)$. So, the choices of $i,j$ in defining the standard representative does not matter for our purpose here. 
-\end{rmk}
 
 \begin{crl}
 The $\psi_T$ we constructed satisfies the required conditions, so $\wt{C}_A$ is a well-defined smooth manifold with corners. For $T\in\cT(A)$, $S_T\subset \wt{C}_A$ is a codimension-$|E(T)|$ stratum. 
@@ -956,6 +979,8 @@ is a submersion.
 \end{proof}
 
 
+
+\cmt{Below is the old version; not needed here.}
 
 \subsection{Smoothing out one node}
 
